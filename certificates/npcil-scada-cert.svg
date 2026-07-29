@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="100%" height="100%">
+  <rect width="1200" height="1500" fill="#FFFFFF"/>
+  
+  <!-- Outer Paper Shadow / Border -->
+  <rect x="30" y="30" width="1140" height="1440" fill="none" stroke="#E2E8F0" stroke-width="2" rx="4"/>
+  <line x1="40" y1="1440" x2="1160" y2="1440" stroke="#CBD5E1" stroke-width="3"/>
+
+  <!-- NPCIL Header Logo & Text -->
+  <circle cx="140" cy="110" r="40" fill="none" stroke="#1E293B" stroke-width="3"/>
+  <text x="140" y="105" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12" fill="#1E293B" text-anchor="middle">NPCIL</text>
+  <text x="140" y="120" font-family="'Inter', sans-serif" font-size="9" fill="#475569" text-anchor="middle">एनपीसीआईएल</text>
+  
+  <!-- Center Heading -->
+  <text x="600" y="85" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#0F172A" text-anchor="middle">न्यूक्लियर पावर कारपोरेशन ऑफ इण्डिया लिमिटेड</text>
+  <text x="600" y="112" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="20" fill="#1E293B" text-anchor="middle">NUCLEAR POWER CORPORATION OF INDIA LIMITED</text>
+  <text x="600" y="134" font-family="'Inter', sans-serif" font-size="15" fill="#475569" text-anchor="middle">(भारत सरकार का उद्यम) (A Government of India Enterprise)</text>
+  <text x="600" y="156" font-family="'Inter', sans-serif" font-size="15" fill="#475569" text-anchor="middle">रावतभाटा राजस्थान साइट Rawatbhata Rajasthan Site</text>
+  <text x="600" y="176" font-family="'Inter', sans-serif" font-size="13" fill="#64748B" text-anchor="middle">डाक: अणुशक्ति, वाया: कोटा(राज) PO: Anushakti–323303 Via: Kota (Raj.)</text>
+
+  <!-- Right Logo -->
+  <circle cx="1060" cy="110" r="40" fill="none" stroke="#1E293B" stroke-width="3"/>
+  <text x="1060" y="115" font-family="'Inter', sans-serif" font-weight="700" font-size="12" fill="#1E293B" text-anchor="middle">Beti Bachao</text>
+
+  <line x1="80" y1="195" x2="1120" y2="195" stroke="#0F172A" stroke-width="1.5"/>
+
+  <!-- Reference & Date -->
+  <text x="80" y="235" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="600" fill="#0F172A">आरआरसाईट/नाप्रकें/मा.सं./2026/एस/878</text>
+  <text x="1120" y="235" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="600" fill="#0F172A" text-anchor="end">दिनांक: 04/07/2026</text>
+
+  <!-- Main Certificate Title -->
+  <text x="600" y="320" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="30" fill="#0F172A" text-anchor="middle" text-decoration="underline">प्रमाणपत्र / Certificate</text>
+
+  <!-- Hindi Body Text -->
+  <text x="100" y="410" font-family="'Inter', sans-serif" font-size="18" fill="#334155">प्रमाणित किया जाता है कि श्री SUJAL SINGH SANKHLA जो कि RAJASTHAN TECHNICAL UNIVERSITY, KOTA के विद्यार्थी हैं ने इस संगठन में दिनांक 19/05/2026 से 03/07/2026 STUDY OF SWITCHYARD EQUIPMENTS AND SCADA MONITORING विषय पर प्रोजेक्ट कार्य / प्रैक्टिकल ट्रेनिंग किया है।</text>
+
+  <!-- English Body Text -->
+  <text x="100" y="580" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="500" fill="#0F172A" width="1000">This is to certify that Mr. SUJAL SINGH SANKHLA student of RAJASTHAN TECHNICAL UNIVERSITY, KOTA has successfully completed his Project Work/Practical Training in this organization from 19/05/2026 to 03/07/2026. During this period, the student did project work/practical training on <tspan font-weight="700" fill="#E11D48">SWITCHYARD EQUIPMENTS AND SCADA MONITORING</tspan> in NPCIL. It is further certified that during the period the student has been sincere and his conduct has been satisfactory.</text>
+
+  <!-- Signatory Block -->
+  <g transform="translate(800, 950)">
+    <text x="150" y="0" font-family="'Cinzel', serif" font-size="24" font-style="italic" fill="#1D4ED8" text-anchor="middle">Sanjeeva Kumawat</text>
+    <text x="150" y="30" font-family="'Inter', sans-serif" font-weight="700" font-size="18" fill="#0F172A" text-anchor="middle">प्रबंधक (मा.सं.)—नाप्रकें.</text>
+    <text x="150" y="55" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="18" fill="#0F172A" text-anchor="middle">Manager (HR)-NTC</text>
+    
+    <text x="150" y="90" font-family="'Inter', sans-serif" font-weight="700" font-size="14" fill="#E11D48" text-anchor="middle">SANJEEVA KUMAWAT</text>
+    <text x="150" y="108" font-family="'Inter', sans-serif" font-size="13" fill="#475569" text-anchor="middle">Manager (HR) / एन.पी.सी.आई.एल.</text>
+    <text x="150" y="124" font-family="'Inter', sans-serif" font-size="13" fill="#475569" text-anchor="middle">Nuclear Power Corporation of India Ltd.</text>
+    <text x="150" y="140" font-family="'Inter', sans-serif" font-size="13" fill="#475569" text-anchor="middle">Rawatbhata Rajasthan Site</text>
+  </g>
+
+  <!-- Footer Info -->
+  <line x1="80" y1="1400" x2="1120" y2="1400" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="600" y="1430" font-family="'Inter', sans-serif" font-size="13" fill="#64748B" text-anchor="middle">वेबसाइट: www.npcil.nic.in | Corporate Identification Number (CIN) – U40104MH1987GOI149458</text>
+  <text x="600" y="1450" font-family="'Inter', sans-serif" font-size="12" fill="#94A3B8" text-anchor="middle">पंजीकृत कार्यालय: 16वां तल, सेंटर–1ए वर्ल्ड ट्रेड सेंटर, कफ परेड, कोलाबा, मुंबई – 400005</text>
+</svg>

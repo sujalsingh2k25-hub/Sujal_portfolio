@@ -3,586 +3,1348 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sujal Singh — Electrical Engineering</title>
-<meta name="description" content="Sujal Singh — Electrical Engineering undergraduate. Embedded systems, renewable energy, smart automation.">
+<title>Sujal Singh — Electrical Engineering &amp; Embedded Systems</title>
+<meta name="description" content="Sujal Singh — Electrical Engineering undergraduate at RTU Kota. Specializing in embedded systems, SCADA automation, and smart control prototypes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 <style>
-/* ============================= TOKENS ============================= */
-:root{
-  --bg:            #0B1220;
-  --bg-elev:       #101B2D;
-  --bg-elev-2:     #152238;
-  --line-c:        rgba(56,189,248,.22);
-  --line-c-strong: rgba(56,189,248,.55);
-  --blue:          #38BDF8;
-  --cyan:          #22D3EE;
-  --amber:         #F5A623;
-  --text:          #E7EEF7;
-  --muted:         #8497B0;
-  --muted-2:       #5C7089;
-  --font-d: 'Space Grotesk', sans-serif;
-  --font-b: 'Inter', sans-serif;
-  --font-m: 'JetBrains Mono', monospace;
-  --maxw: 1180px;
-  --edge: 6px;
+/* ============================= DESIGN SYSTEM TOKENS (LIGHT DEFAULT) ============================= */
+:root {
+  --bg-main:         #FFFFFF;
+  --bg-subtle:       #FAFAF9;
+  --bg-elevated:     #F4F4F5;
+  --card-bg:         rgba(255, 255, 255, 0.85);
+  --card-border:     #E4E4E7;
+  
+  --red-primary:     #E11D48;
+  --red-hover:       #BE123C;
+  --red-light:       #FFF1F2;
+  --red-subtle:      rgba(225, 29, 72, 0.08);
+  --red-glow:        rgba(225, 29, 72, 0.25);
+  --red-gradient:    linear-gradient(135deg, #E11D48 0%, #F43F5E 50%, #BE123C 100%);
+  
+  --text-main:       #09090B;
+  --text-muted:      #52525B;
+  --text-subtle:     #71717A;
+  
+  --line-c:          rgba(225, 29, 72, 0.14);
+  --line-c-strong:   rgba(225, 29, 72, 0.35);
+  
+  --font-heading:    'Space Grotesk', sans-serif;
+  --font-body:       'Plus Jakarta Sans', sans-serif;
+  --font-mono:       'JetBrains Mono', monospace;
+  --font-serif:      'Cinzel', serif;
+  
+  --max-w:           1200px;
+  --radius-sm:       12px;
+  --radius-md:       20px;
+  --radius-lg:       28px;
+  --radius-full:     9999px;
+  
+  --shadow-sm:       0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md:       0 12px 32px -8px rgba(0, 0, 0, 0.06);
+  --shadow-lg:       0 24px 48px -12px rgba(225, 29, 72, 0.12);
 }
-*{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-b);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-a{color:inherit; text-decoration:none;}
-img,svg{display:block; max-width:100%;}
-ul{list-style:none;}
-.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
-section{position:relative;}
-::selection{background:var(--blue); color:var(--bg);}
 
-/* subtle grid + noise background across whole page */
-body::before{
-  content:"";
-  position:fixed; inset:0;
+/* ============================= DARK MODE COLOR SCHEME (BLACK & NEON GREEN) ============================= */
+body.dark-mode {
+  --bg-main:         #050505;
+  --bg-subtle:       #0D0D0E;
+  --bg-elevated:     #141416;
+  --card-bg:         rgba(18, 18, 20, 0.85);
+  --card-border:     #27272A;
+  
+  --red-primary:     #00FF66; /* Electric Cyber Neon Green */
+  --red-hover:       #00E059;
+  --red-light:       rgba(0, 255, 102, 0.1);
+  --red-subtle:      rgba(0, 255, 102, 0.08);
+  --red-glow:        rgba(0, 255, 102, 0.4);
+  --red-gradient:    linear-gradient(135deg, #00FF66 0%, #10B981 50%, #059669 100%);
+  
+  --text-main:       #F8FAFC;
+  --text-muted:      #A1A1AA;
+  --text-subtle:     #71717A;
+  
+  --line-c:          rgba(0, 255, 102, 0.15);
+  --line-c-strong:   rgba(0, 255, 102, 0.45);
+
+  --shadow-sm:       0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md:       0 12px 32px -8px rgba(0, 0, 0, 0.6);
+  --shadow-lg:       0 24px 48px -12px rgba(0, 255, 102, 0.25);
+}
+
+body.dark-mode header.nav {
+  background: rgba(5, 5, 5, 0.85);
+  border-bottom-color: rgba(39, 39, 42, 0.8);
+}
+
+body.dark-mode .floating-dock {
+  background: rgba(18, 18, 20, 0.88);
+  border-color: rgba(39, 39, 42, 0.9);
+}
+
+body.dark-mode .chip-core,
+body.dark-mode .project-hero-viz,
+body.dark-mode .stat-card,
+body.dark-mode .skill-card,
+body.dark-mode .cert-card,
+body.dark-mode .hobby-card,
+body.dark-mode .contact-panel,
+body.dark-mode .cert-paper,
+body.dark-mode .cert-modal-container {
+  background: #0D0D0E;
+  border-color: #27272A;
+}
+
+body.dark-mode .form-field input,
+body.dark-mode .form-field textarea {
+  background: #141416;
+  border-color: #27272A;
+  color: #F8FAFC;
+}
+
+body.dark-mode .btn-ghost {
+  background: #141416;
+  border-color: #27272A;
+  color: #F8FAFC;
+}
+
+body.dark-mode .btn-primary {
+  color: #050505;
+  font-weight: 700;
+}
+
+body.dark-mode .badge {
+  background: rgba(18, 18, 20, 0.95);
+  border-color: #27272A;
+  color: #F8FAFC;
+}
+
+/* ============================= SUPPRESS SYSTEM CURSOR ============================= */
+*, *::before, *::after, html, body, a, button, input, textarea, select, .dock-item, .cert-card, .skill-card, .project-card, .hobby-card {
+  cursor: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+  padding-bottom: 90px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+ul { list-style: none; }
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+::selection {
+  background: var(--red-primary);
+  color: #050505;
+}
+
+/* ============================= AMBIENT BACKGROUND EFFECTS ============================= */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.45;
+  animation: floatOrb 22s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--red-glow), transparent 70%);
+  top: -100px; right: -50px;
+}
+
+.orb-2 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--red-glow), transparent 70%);
+  bottom: 20%; left: -150px;
+  animation-duration: 28s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.08); }
+  100% { transform: translate(-40px, 80px) scale(0.95); }
+}
+
+/* Subtle background grid pattern */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
   background-image:
     linear-gradient(var(--line-c) 1px, transparent 1px),
     linear-gradient(90deg, var(--line-c) 1px, transparent 1px);
-  background-size:64px 64px;
-  opacity:.05;
-  pointer-events:none;
-  z-index:0;
+  background-size: 56px 56px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
 }
 
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+/* ============================= SPOTLIGHT CURSOR ============================= */
+.spotlight-overlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(600px circle at var(--cursor-x, 50%) var(--cursor-y, 50%), var(--red-subtle), transparent 75%);
 }
 
-/* ============================= NAV ============================= */
-header.nav{
-  position:fixed; top:0; left:0; right:0; z-index:100;
-  background:rgba(11,18,32,.72);
-  backdrop-filter:blur(14px) saturate(140%);
-  border-bottom:1px solid var(--line-c);
-}
-.nav-inner{
-  max-width:var(--maxw); margin:0 auto; padding:16px 32px;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.logo{
-  display:flex; align-items:center; gap:10px;
-  font-family:var(--font-m); font-weight:600; font-size:15px; letter-spacing:.02em;
-}
-.logo-chip{
-  width:34px; height:34px; border-radius:8px;
-  border:1.5px solid var(--blue);
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-d); font-weight:700; font-size:13px;
-  color:var(--blue);
-  box-shadow:0 0 14px rgba(56,189,248,.35), inset 0 0 8px rgba(56,189,248,.15);
-  position:relative;
-}
-.logo-chip::before, .logo-chip::after{
-  content:""; position:absolute; width:6px; height:1.5px; background:var(--blue);
-}
-.logo-chip::before{ left:-6px; }
-.logo-chip::after{ right:-6px; }
-.navlinks{display:flex; gap:30px; font-size:14px; color:var(--muted);}
-.navlinks a{position:relative; padding:4px 0; transition:color .2s;}
-.navlinks a:hover{color:var(--text);}
-.navlinks a::after{
-  content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
-  background:var(--cyan); transition:width .25s ease;
-}
-.navlinks a:hover::after{width:100%;}
-.nav-cta{
-  font-family:var(--font-m); font-size:12.5px; padding:9px 16px;
-  border:1px solid var(--blue); border-radius:6px; color:var(--blue);
-  transition:all .2s ease; white-space:nowrap;
-}
-.nav-cta:hover{background:var(--blue); color:var(--bg); box-shadow:0 0 20px rgba(56,189,248,.5);}
-.nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
-.nav-toggle span{width:22px; height:2px; background:var(--text);}
-
-/* ============================= PCB TRACE (signature) ============================= */
-.trace-rail{
-  position:absolute; left:32px; top:0; bottom:0; width:2px;
-  background:linear-gradient(to bottom, transparent, var(--line-c) 4%, var(--line-c) 96%, transparent);
-  z-index:1;
-}
-.node{
-  position:relative; padding-left:56px;
-}
-.node-pad{
-  position:absolute; left:32px; top:6px; transform:translateX(-50%);
-  width:14px; height:14px; border-radius:50%;
-  background:var(--bg-elev);
-  border:2px solid var(--muted-2);
-  transition:all .5s ease;
-  z-index:2;
-}
-.node-pad::after{
-  content:""; position:absolute; inset:3px; border-radius:50%;
-  background:var(--muted-2); transition:all .5s ease;
-}
-.node.lit .node-pad{ border-color:var(--cyan); box-shadow:0 0 14px rgba(34,211,238,.7); }
-.node.lit .node-pad::after{ background:var(--cyan); }
-.designator{
-  position:absolute; left:56px; top:2px;
-  font-family:var(--font-m); font-size:11px; color:var(--muted-2);
-  letter-spacing:.06em; transition:color .5s ease;
-}
-.node.lit .designator{ color:var(--cyan); }
-
-@media (max-width:860px){
-  .trace-rail{left:18px;}
-  .node{padding-left:34px;}
-  .node-pad{left:18px;}
-  .designator{position:static; display:block; margin-bottom:6px;}
+.custom-cursor {
+  position: fixed; width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--red-primary); pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 0 16px var(--red-glow);
 }
 
-/* ============================= HERO ============================= */
-.hero{
-  min-height:100vh; display:flex; align-items:center;
-  padding:140px 0 80px;
-  position:relative; z-index:2;
-}
-.hero .wrap{
-  display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center;
-}
-.eyebrow{
-  font-family:var(--font-m); font-size:12.5px; color:var(--cyan);
-  letter-spacing:.14em; text-transform:uppercase;
-  display:flex; align-items:center; gap:10px; margin-bottom:22px;
-}
-.eyebrow::before{content:""; width:22px; height:1px; background:var(--cyan);}
-h1.headline{
-  font-family:var(--font-d); font-weight:700;
-  font-size:clamp(42px, 6vw, 72px); line-height:1.02; letter-spacing:-.01em;
-  margin-bottom:20px;
-}
-h1.headline .accent{
-  background:linear-gradient(90deg, var(--blue), var(--cyan));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.typewrap{
-  font-family:var(--font-m); font-size:clamp(14px,1.6vw,18px);
-  color:var(--muted); margin-bottom:34px; min-height:26px;
-}
-.typewrap .cursor{
-  display:inline-block; width:8px; height:1em; background:var(--cyan);
-  margin-left:2px; vertical-align:-2px; animation:blink 1s step-end infinite;
-}
-@keyframes blink{50%{opacity:0;}}
-.hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
-.btn{
-  font-family:var(--font-m); font-size:13.5px; padding:13px 24px;
-  border-radius:6px; border:1px solid transparent; cursor:pointer;
-  transition:all .22s ease; display:inline-flex; align-items:center; gap:8px;
-}
-.btn-primary{background:var(--blue); color:#04121F; font-weight:600;}
-.btn-primary:hover{box-shadow:0 0 26px rgba(56,189,248,.55); transform:translateY(-2px);}
-.btn-ghost{border-color:var(--line-c-strong); color:var(--text);}
-.btn-ghost:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px);}
-
-/* hero visual: chip avatar + orbiting badges */
-.hero-visual{
-  position:relative; width:100%; aspect-ratio:1/1; max-width:420px; margin:0 auto;
-}
-.orbit-ring{
-  position:absolute; inset:0; border-radius:50%;
-  border:1px dashed var(--line-c-strong);
-  animation:spin 40s linear infinite;
-}
-.orbit-ring.r2{ inset:36px; border-color:var(--line-c); animation-duration:60s; animation-direction:reverse;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.chip-core{
-  position:absolute; inset:20%; border-radius:50%;
-  background:#FFFFFF;
-  border:1.5px solid var(--blue);
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 0 60px rgba(56,189,248,.28), inset 0 0 30px rgba(56,189,248,.1);
-  overflow:hidden;
-}
-.chip-core img{
-  width:100%; height:100%; object-fit:cover; object-position:center 15%;
-  filter:saturate(1.03) contrast(1.02);
-  transform: scale(1.15) translateX(30px);
-  clip-path: inset(0 100% 0 0);
-  transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), clip-path 1.2s cubic-bezier(0.76, 0, 0.24, 1);
-  transition-delay: 0.15s;
-}
-.loaded .chip-core img{
-  transform: scale(1) translateX(0);
-  clip-path: inset(0 0 0 0);
-}
-.chip-core:hover img{
-  transform:scale(1.08) translateX(0) !important;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition-delay: 0s !important;
-}
-.chip-leg{position:absolute; background:var(--line-c-strong);}
-.chip-leg.h{height:1.5px; width:16px;}
-.chip-leg.v{width:1.5px; height:16px;}
-.badge{
-  position:absolute; font-family:var(--font-m); font-size:11.5px;
-  padding:7px 12px; border-radius:20px; background:var(--bg-elev);
-  border:1px solid var(--line-c-strong); color:var(--text);
-  box-shadow:0 8px 20px rgba(0,0,0,.35);
-  animation:float 6s ease-in-out infinite;
-}
-.badge.b1{top:2%; left:0; animation-delay:0s;}
-.badge.b2{top:20%; right:-6%; animation-delay:1.2s;}
-.badge.b3{bottom:14%; left:-8%; animation-delay:2.4s;}
-.badge.b4{bottom:0%; right:6%; animation-delay:3.6s;}
-@keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
-
-@media (max-width:500px){
-  .badge.b1{left:4%;}
-  .badge.b2{right:2%;}
-  .badge.b3{left:2%;}
-  .badge.b4{right:4%;}
+.custom-cursor-dot {
+  position: fixed; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red-primary); pointer-events: none; z-index: 100000;
+  transform: translate(-50%, -50%);
 }
 
-@media (max-width:900px){
-  .hero .wrap{grid-template-columns:1fr; text-align:left;}
-  .hero-visual{max-width:300px; margin-top:20px;}
+.custom-cursor.hovering {
+  transform: translate(-50%, -50%) scale(1.75);
+  background: var(--red-light);
+  border-color: var(--red-hover);
+  box-shadow: 0 0 28px var(--red-glow);
 }
 
-/* ============================= SECTION HEADS ============================= */
-.section-pad{ padding:120px 0; position:relative; z-index:2;}
-.sec-head{ margin-bottom:56px; max-width:640px;}
-.sec-eyebrow{
-  font-family:var(--font-m); font-size:12px; color:var(--muted-2);
-  letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px;
-}
-.sec-title{
-  font-family:var(--font-d); font-weight:600; font-size:clamp(28px,3.6vw,40px);
-  letter-spacing:-.01em;
-}
-.sec-title .dim{color:var(--muted-2); font-weight:400;}
-
-/* ============================= ABOUT ============================= */
-.about-grid{display:grid; grid-template-columns:1.3fr .9fr; gap:56px; align-items:start;}
-.about-text p{color:var(--muted); font-size:17px; max-width:52ch;}
-.stats{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line-c); border:1px solid var(--line-c); border-radius:10px; overflow:hidden; margin-top:8px;}
-.stat{background:var(--bg-elev); padding:22px 20px;}
-.stat-label{font-family:var(--font-m); font-size:10.5px; color:var(--muted-2); letter-spacing:.08em; margin-bottom:8px;}
-.stat-num{font-family:var(--font-d); font-size:30px; font-weight:700; color:var(--cyan);}
-.stat-desc{font-size:12.5px; color:var(--muted); margin-top:2px;}
-
-@media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
-
-/* ============================= SKILLS ============================= */
-.skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
-.skill-card{
-  background:var(--bg-elev); border:1px solid var(--line-c); border-radius:12px;
-  padding:26px 22px; position:relative; overflow:hidden;
-  transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-}
-.skill-card::before{
-  content:""; position:absolute; inset:0; border-radius:12px; padding:1px;
-  background:linear-gradient(135deg, var(--cyan), transparent 40%);
-  opacity:0; transition:opacity .3s ease;
-  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor; mask-composite:exclude;
-}
-.skill-card:hover{ transform:translateY(-6px); box-shadow:0 16px 34px rgba(0,0,0,.35), 0 0 24px rgba(56,189,248,.15); }
-.skill-card:hover::before{ opacity:1; }
-.skill-icon{width:34px; height:34px; margin-bottom:16px; color:var(--cyan);}
-.skill-name{font-family:var(--font-d); font-weight:600; font-size:17px; margin-bottom:6px;}
-.skill-desc{font-size:13px; color:var(--muted);}
-.skill-tag{
-  position:absolute; top:18px; right:18px; font-family:var(--font-m);
-  font-size:10px; color:var(--muted-2); letter-spacing:.05em;
-}
-@media (max-width:760px){ .skill-grid{grid-template-columns:1fr 1fr;} }
-@media (max-width:520px){ .skill-grid{grid-template-columns:1fr;} }
-
-.soft-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:36px;}
-.soft-pill{
-  font-family:var(--font-m); font-size:12px; padding:8px 16px; border-radius:20px;
-  border:1px solid var(--line-c); color:var(--muted);
+/* ============================= NAVIGATION & DOCK SCROLLER ============================= */
+header.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid rgba(228, 228, 231, 0.8);
+  transition: all 0.3s ease;
 }
 
-/* ============================= EXPERIENCE / EDUCATION (timeline) ============================= */
-.tl-item{ padding-bottom:44px; }
-.tl-item:last-child{ padding-bottom:0; }
-.tl-date{ font-family:var(--font-m); font-size:12px; color:var(--cyan); margin-bottom:6px; }
-.tl-role{ font-family:var(--font-d); font-weight:600; font-size:21px; margin-bottom:2px;}
-.tl-org{ font-size:14px; color:var(--muted); margin-bottom:14px;}
-.tl-list{display:flex; flex-direction:column; gap:8px;}
-.tl-list li{
-  font-size:14.5px; color:var(--muted); padding-left:20px; position:relative;
-}
-.tl-list li::before{
-  content:"✔"; position:absolute; left:0; top:1px; color:var(--blue); font-size:11px;
+header.nav.scrolled {
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.06);
+  background: rgba(255, 255, 255, 0.92);
 }
 
-/* ============================= PROJECTS ============================= */
-.project-card{
-  background:linear-gradient(160deg, var(--bg-elev), var(--bg-elev-2));
-  border:1px solid var(--line-c); border-radius:16px; padding:44px; overflow:hidden; position:relative;
-}
-.project-hero-viz{
-  width:100%; aspect-ratio:16/7; border-radius:12px; margin-bottom:34px;
-  background:#FFFFFF;
-  border:1px solid rgba(56, 189, 248, 0.15);
-  display:flex; align-items:center; justify-content:center;
-  position:relative;
-  overflow:hidden;
-  padding:24px;
-  box-shadow:inset 0 0 20px rgba(11, 18, 32, 0.04);
-  opacity:0;
-  transform:translateY(25px);
-  transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.project-card.show .project-hero-viz {
-  opacity:1;
-  transform:translateY(0);
-}
-.project-hero-viz img{
-  width:100%; height:100%; object-fit:contain;
-  filter:drop-shadow(0 8px 20px rgba(0,0,0,0.08));
-  transform: scale(0.95);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.project-card.show .project-hero-viz img {
-  transform: scale(1);
-}
-.project-card:hover .project-hero-viz img{
-  transform:scale(1.04) !important;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition-delay: 0s !important;
-}
-.project-title-row{display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:6px;}
-.project-title{font-family:var(--font-d); font-weight:700; font-size:26px;}
-.project-date{font-family:var(--font-m); font-size:12px; color:var(--muted-2);}
-.tech-tags{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 30px;}
-.tech-tag{
-  font-family:var(--font-m); font-size:11.5px; padding:6px 13px; border-radius:6px;
-  background:rgba(56,189,248,.08); border:1px solid var(--line-c-strong); color:var(--blue);
-}
-.project-cols{display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:10px;}
-.pcol-h{font-family:var(--font-m); font-size:11px; color:var(--muted-2); letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;}
-.pcol p, .pcol li{font-size:14px; color:var(--muted);}
-.pcol ul{display:flex; flex-direction:column; gap:8px;}
-.pcol li{padding-left:16px; position:relative;}
-.pcol li::before{content:"—"; position:absolute; left:0; color:var(--muted-2);}
-@media (max-width:800px){ .project-cols{grid-template-columns:1fr;} .project-card{padding:28px;} }
-
-/* ============================= HOBBIES ============================= */
-.hobby-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
-.hobby-card{
-  background:rgba(255,255,255,.02); backdrop-filter:blur(6px);
-  border:1px solid var(--line-c); border-radius:14px; padding:30px 24px;
-  transition:transform .3s ease, background .3s ease;
-}
-.hobby-card:hover{ transform:translateY(-4px); background:rgba(255,255,255,.04); }
-.hobby-emoji{font-size:26px; margin-bottom:14px;}
-.hobby-name{font-family:var(--font-d); font-weight:600; font-size:16px; margin-bottom:6px;}
-.hobby-desc{font-size:13px; color:var(--muted);}
-@media (max-width:700px){ .hobby-grid{grid-template-columns:1fr;} }
-
-/* ============================= CONTACT ============================= */
-.contact-panel{
-  background:var(--bg-elev); border:1px solid var(--line-c); border-radius:18px;
-  padding:52px; display:grid; grid-template-columns:1fr 1fr; gap:50px;
-  position:relative; overflow:hidden;
-}
-.contact-panel::before{
-  content:""; position:absolute; top:-40%; right:-10%; width:400px; height:400px; border-radius:50%;
-  background:radial-gradient(circle, rgba(56,189,248,.14), transparent 70%);
-  pointer-events:none;
-}
-.contact-list{display:flex; flex-direction:column; gap:22px;}
-.contact-row{display:flex; align-items:center; gap:14px;}
-.contact-icon{
-  width:38px; height:38px; border-radius:9px; border:1px solid var(--line-c-strong);
-  display:flex; align-items:center; justify-content:center; color:var(--cyan); flex-shrink:0;
-}
-.contact-k{font-family:var(--font-m); font-size:10.5px; color:var(--muted-2); letter-spacing:.06em;}
-.contact-v{font-size:15px; color:var(--text);}
-.contact-v a:hover{color:var(--cyan);}
-.form-field{margin-bottom:16px;}
-.form-field label{display:block; font-family:var(--font-m); font-size:11px; color:var(--muted-2); letter-spacing:.06em; margin-bottom:8px;}
-.form-field input, .form-field textarea{
-  width:100%; background:var(--bg); border:1px solid var(--line-c); border-radius:8px;
-  padding:12px 14px; color:var(--text); font-family:var(--font-b); font-size:14px;
-  transition:border-color .2s ease;
-}
-.form-field input:focus, .form-field textarea:focus{ outline:none; border-color:var(--cyan); }
-.form-field textarea{resize:vertical; min-height:90px;}
-@media (max-width:800px){ .contact-panel{grid-template-columns:1fr; padding:32px;} }
-
-/* ============================= FOOTER ============================= */
-footer{
-  padding:40px 0 50px; text-align:center; position:relative; z-index:2;
-  border-top:1px solid var(--line-c);
-}
-footer p{font-family:var(--font-m); font-size:12px; color:var(--muted-2);}
-
-/* focus visibility */
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-  outline:2px solid var(--cyan); outline-offset:3px;
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 16px 32px;
+  display: flex; align-items: center; justify-content: space-between;
 }
 
-/* reveal on scroll */
-.reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
-.reveal.show{ opacity:1; transform:translateY(0); }
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-weight: 600; font-size: 15px; letter-spacing: -0.01em;
+  color: var(--text-main);
+}
 
-/* sweep shine hover effect for cards & primary buttons */
-.btn-primary, .skill-card, .project-card, .hobby-card {
+.logo-chip {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--red-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading); font-weight: 700; font-size: 13px;
+  color: var(--red-primary);
+  background: var(--red-light);
+  box-shadow: 0 0 16px var(--red-glow);
   position: relative;
-  overflow: hidden;
 }
-.btn-primary::after, .skill-card::after, .project-card::after, .hobby-card::after {
+
+.navlinks { display: flex; gap: 28px; font-size: 14px; color: var(--text-muted); }
+.navlinks a { position: relative; padding: 4px 0; transition: color .2s; font-weight: 500; }
+.navlinks a:hover { color: var(--red-primary); }
+.navlinks a::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px;
+  background: var(--red-gradient); transition: width .25s ease; border-radius: 2px;
+}
+.navlinks a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-family: var(--font-mono); font-size: 12.5px; padding: 10px 22px;
+  border: 1.5px solid var(--red-primary); border-radius: var(--radius-full);
+  color: var(--red-primary); background: var(--red-light); font-weight: 600;
+  transition: all .25s ease; white-space: nowrap;
+}
+.nav-cta:hover {
+  background: var(--red-primary); color: #050505;
+  box-shadow: 0 4px 20px var(--red-glow); transform: translateY(-1px);
+}
+
+/* FLOATING DOCK NAVIGATION SCROLLER */
+.dock-container {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+.floating-dock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(228, 228, 231, 0.9);
+  border-radius: var(--radius-full);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--line-c);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-dock:hover {
+  box-shadow: 0 24px 48px -12px var(--red-glow), 0 0 0 1px var(--line-c-strong);
+  border-color: var(--line-c-strong);
+}
+
+.dock-item {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  background: transparent;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+  border: none;
+}
+
+.dock-item:hover, .dock-item.active {
+  color: var(--red-primary);
+  background: var(--red-light);
+}
+
+.dock-item.active::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: -150%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.12),
-    transparent
-  );
-  transform: skewX(-20deg);
+  bottom: -3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--red-primary);
+  box-shadow: 0 0 8px var(--red-primary);
+}
+
+.dock-tooltip {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 4px 10px;
+  background: var(--text-main);
+  color: var(--bg-main);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
   pointer-events: none;
-}
-.btn-primary:hover::after, .skill-card:hover::after, .project-card:hover::after, .hobby-card:hover::after {
-  left: 150%;
-  transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* slide-in clip reveals (for images) - handled by specific classes below */
-
-/* directional scroll-reveals */
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal-left.show {
+.dock-item:hover .dock-tooltip {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(-50%) translateY(0);
 }
 
-.reveal-right {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal-right.show {
-  opacity: 1;
-  transform: translateX(0);
+.dock-divider {
+  width: 1px; height: 24px; background: var(--card-border); margin: 0 4px;
 }
 
-/* mobile nav side drawer with backdrop-filter blur */
-@media (max-width:820px){
-  .navlinks {
-    display: flex;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 300px;
-    height: 100vh;
-    background: rgba(16, 27, 45, 0.96);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
-    flex-direction: column;
-    padding: 110px 40px;
-    gap: 24px;
-    border-left: 1px solid var(--line-c);
-    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 99;
-  }
-  .nav-cta { display:none; }
-  .nav-toggle {
-    display: flex;
-    position: relative;
-    z-index: 101; /* sits on top of drawer */
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    width: 24px;
-    height: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  .navlinks.open {
-    right: 0;
-  }
-  
-  /* hamburger morphing to X animation */
-  .nav-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--text);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, width 0.3s ease;
-  }
-  .nav-toggle span:nth-child(2) {
-    width: 16px;
-  }
-  .nav-toggle.open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-    width: 22px;
-  }
-  .nav-toggle.open span:nth-child(2) {
-    opacity: 0;
-    width: 0;
-  }
-  .nav-toggle.open span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-    width: 22px;
-  }
+/* ============================= PCB TRACE RAIL ============================= */
+.trace-rail {
+  position: absolute; left: 32px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--line-c) 4%, var(--line-c) 96%, transparent);
+  z-index: 1;
+}
+
+.node { position: relative; padding-left: 56px; }
+.node-pad {
+  position: absolute; left: 32px; top: 8px; transform: translateX(-50%);
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--bg-main); border: 2.5px solid var(--text-subtle);
+  transition: all .5s ease; z-index: 2;
+}
+.node-pad::after {
+  content: ""; position: absolute; inset: 2.5px; border-radius: 50%;
+  background: var(--text-subtle); transition: all .5s ease;
+}
+.node.lit .node-pad { border-color: var(--red-primary); box-shadow: 0 0 16px var(--red-glow); }
+.node.lit .node-pad::after { background: var(--red-primary); }
+
+.designator {
+  position: absolute; left: 56px; top: 4px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle);
+  letter-spacing: .08em; transition: color .5s ease; font-weight: 600;
+}
+.node.lit .designator { color: var(--red-primary); }
+
+/* ============================= HERO SECTION ============================= */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 140px 0 90px; position: relative; z-index: 2;
+}
+
+.hero .wrap {
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center;
+}
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: var(--radius-full);
+  background: var(--red-light); border: 1px solid var(--line-c-strong);
+  font-family: var(--font-mono); font-size: 12px; color: var(--red-primary);
+  font-weight: 600; margin-bottom: 24px;
+}
+
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--red-primary);
+  box-shadow: 0 0 10px var(--red-primary);
+  animation: pulseDot 1.8s infinite;
+}
+@keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.3); } }
+
+h1.headline {
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: clamp(44px, 5.8vw, 76px); line-height: 1.04; letter-spacing: -0.02em;
+  margin-bottom: 24px; color: var(--text-main);
+}
+
+h1.headline .accent-gradient {
+  background: var(--red-gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.typewrap {
+  font-family: var(--font-mono); font-size: clamp(15px, 1.8vw, 19px);
+  color: var(--text-muted); margin-bottom: 38px; min-height: 28px; font-weight: 500;
+}
+.typewrap .cursor {
+  display: inline-block; width: 8px; height: 1em; background: var(--red-primary);
+  margin-left: 3px; vertical-align: -2px; animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn {
+  font-family: var(--font-mono); font-size: 13.5px; padding: 14px 30px;
+  border-radius: var(--radius-full); border: 1px solid transparent; cursor: none !important;
+  transition: all .25s cubic-bezier(0.16, 1, 0.3, 1); display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 600; position: relative; overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--red-gradient); color: #050505;
+  box-shadow: var(--shadow-lg);
+}
+.btn-primary:hover {
+  transform: translateY(-2px); box-shadow: 0 12px 30px var(--red-glow);
+}
+
+.btn-ghost {
+  border-color: var(--card-border); color: var(--text-main); background: var(--bg-main);
+  box-shadow: var(--shadow-sm);
+}
+.btn-ghost:hover {
+  border-color: var(--red-primary); color: var(--red-primary); background: var(--red-light);
+  transform: translateY(-2px);
+}
+
+/* HERO VISUAL AVATAR */
+.hero-visual {
+  position: relative; width: 100%; aspect-ratio: 1/1; max-width: 410px; margin: 0 auto;
+}
+
+.orbit-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1.5px dashed var(--line-c-strong);
+  animation: spin 45s linear infinite;
+}
+.orbit-ring.r2 { inset: 32px; border-color: var(--line-c); animation-duration: 65s; animation-direction: reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.chip-core {
+  position: absolute; inset: 16%; border-radius: 50%;
+  background: var(--bg-main);
+  border: 3px solid var(--red-primary);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 60px var(--red-glow), inset 0 0 25px var(--red-light);
+  overflow: hidden; transition: transform 0.4s ease;
+}
+.chip-core img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 15%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.chip-core:hover img { transform: scale(1.08); }
+
+.badge {
+  position: absolute; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600;
+  padding: 9px 18px; border-radius: var(--radius-full); background: var(--card-bg);
+  backdrop-filter: blur(10px); border: 1px solid var(--card-border); color: var(--text-main);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  animation: floatBadge 6s ease-in-out infinite; transition: all 0.3s ease;
+}
+.badge:hover { border-color: var(--red-primary); color: var(--red-primary); transform: translateY(-4px) scale(1.04); }
+
+.badge.b1 { top: 2%; left: -4%; animation-delay: 0s; }
+.badge.b2 { top: 22%; right: -8%; animation-delay: 1.2s; }
+.badge.b3 { bottom: 16%; left: -10%; animation-delay: 2.4s; }
+.badge.b4 { bottom: 2%; right: 2%; animation-delay: 3.6s; }
+@keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* ============================= SECTION HEADINGS ============================= */
+.section-pad { padding: 120px 0; position: relative; z-index: 2; }
+.sec-head { margin-bottom: 56px; max-width: 650px; }
+.sec-eyebrow {
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--red-primary);
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-eyebrow::before { content: ""; width: 16px; height: 2px; background: var(--red-primary); }
+.sec-title {
+  font-family: var(--font-heading); font-weight: 700; font-size: clamp(30px, 3.8vw, 42px);
+  letter-spacing: -0.02em; color: var(--text-main);
+}
+.sec-title .dim { color: var(--text-subtle); font-weight: 400; }
+
+/* ============================= ABOUT SECTION ============================= */
+.about-grid { display: grid; grid-template-columns: 1.25fr 0.95fr; gap: 60px; align-items: start; }
+.about-text p { color: var(--text-muted); font-size: 17.5px; line-height: 1.7; max-width: 52ch; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 8px; }
+.stat-card {
+  background: var(--card-bg); backdrop-filter: blur(12px);
+  padding: 26px 22px; border: 1px solid var(--card-border); border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative; overflow: hidden;
+}
+.stat-card:hover {
+  border-color: var(--line-c-strong); transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.stat-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); letter-spacing: .08em; margin-bottom: 8px; font-weight: 600; }
+.stat-num { font-family: var(--font-heading); font-size: 34px; font-weight: 700; color: var(--red-primary); line-height: 1.1; }
+.stat-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+/* ============================= SKILLS CARDS ============================= */
+.skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.skill-card {
+  background: var(--card-bg); backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border); border-radius: var(--radius-md);
+  padding: 30px 26px; position: relative; overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.skill-card:hover {
+  transform: translateY(-6px); border-color: var(--line-c-strong);
+  box-shadow: 0 20px 40px -15px var(--red-glow);
+}
+.skill-icon-wrap {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--red-light); border: 1px solid var(--line-c-strong);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; color: var(--red-primary); transition: transform 0.3s ease;
+}
+.skill-card:hover .skill-icon-wrap { transform: scale(1.1) rotate(5deg); }
+.skill-name { font-family: var(--font-heading); font-weight: 700; font-size: 18px; margin-bottom: 8px; color: var(--text-main); }
+.skill-desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+.skill-tag {
+  position: absolute; top: 20px; right: 20px; font-family: var(--font-mono);
+  font-size: 11px; color: var(--red-primary); font-weight: 600;
+  background: var(--red-light); padding: 4px 12px; border-radius: var(--radius-full);
+}
+
+.soft-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+.soft-pill {
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; padding: 10px 20px;
+  border-radius: var(--radius-full); border: 1px solid var(--line-c-strong);
+  background: var(--red-light); color: var(--red-primary);
+  transition: all 0.25s ease;
+}
+.soft-pill:hover { transform: translateY(-2px); background: var(--red-primary); color: #050505; }
+
+/* ============================= TIMELINE (EXPERIENCE & EDUCATION) ============================= */
+.tl-item { padding-bottom: 48px; position: relative; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-date { font-family: var(--font-mono); font-size: 12.5px; color: var(--red-primary); font-weight: 600; margin-bottom: 6px; }
+.tl-role { font-family: var(--font-heading); font-weight: 700; font-size: 22px; margin-bottom: 4px; color: var(--text-main); }
+.tl-org { font-size: 15px; color: var(--text-subtle); margin-bottom: 16px; font-weight: 500; }
+.tl-list { display: flex; flex-direction: column; gap: 10px; }
+.tl-list li { font-size: 15px; color: var(--text-muted); padding-left: 24px; position: relative; }
+.tl-list li::before {
+  content: "✔"; position: absolute; left: 0; top: 1px; color: var(--red-primary); font-size: 12px; font-weight: bold;
+}
+
+/* ============================= FEATURED PROJECT ============================= */
+.project-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px); border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg); padding: 48px; position: relative; overflow: hidden;
+  box-shadow: var(--shadow-md); transition: all 0.4s ease;
+}
+.project-card:hover { border-color: var(--line-c-strong); box-shadow: var(--shadow-lg); }
+
+.project-hero-viz {
+  width: 100%; aspect-ratio: 16/7; border-radius: var(--radius-md); margin-bottom: 36px;
+  background: var(--bg-main); border: 1px solid var(--line-c);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: 24px; box-shadow: var(--shadow-sm);
+}
+.project-hero-viz img {
+  width: 100%; height: 100%; object-fit: contain;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card:hover .project-hero-viz img { transform: scale(1.05); }
+
+.project-title-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.project-title { font-family: var(--font-heading); font-weight: 700; font-size: 28px; color: var(--text-main); }
+.project-date { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-subtle); font-weight: 600; }
+
+.tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 34px; }
+.tech-tag {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600; padding: 7px 18px;
+  border-radius: var(--radius-full); background: var(--red-light);
+  border: 1px solid var(--line-c-strong); color: var(--red-primary);
+}
+
+.project-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 12px; }
+.pcol-h { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
+.pcol p, .pcol li { font-size: 14.5px; color: var(--text-muted); }
+.pcol ul { display: flex; flex-direction: column; gap: 10px; }
+.pcol li { padding-left: 18px; position: relative; }
+.pcol li::before { content: "—"; position: absolute; left: 0; color: var(--red-primary); }
+
+/* ============================= CERTIFICATIONS SECTION ============================= */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.cert-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: none !important;
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--line-c-strong);
+  box-shadow: 0 20px 40px -15px var(--red-glow);
+}
+
+.cert-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--red-primary);
+  background: var(--red-light);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--line-c-strong);
+  width: fit-content;
+  margin-bottom: 16px;
+}
+
+.cert-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.cert-org {
+  font-size: 14.5px;
+  color: var(--text-subtle);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.cert-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+
+.cert-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-subtle);
+  padding-top: 16px;
+  border-top: 1px solid var(--card-border);
+}
+
+.view-cert-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--red-primary);
+  background: var(--red-light);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--line-c-strong);
+  transition: all 0.25s ease;
+}
+
+.cert-card:hover .view-cert-btn {
+  background: var(--red-primary);
+  color: #050505;
+}
+
+/* ============================= CERTIFICATE LIGHTBOX MODAL ============================= */
+.cert-modal-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(5, 5, 5, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-modal-overlay.active {
+  opacity: 1; pointer-events: auto;
+}
+
+.cert-modal-container {
+  width: 100%; max-width: 860px; max-height: 90vh;
+  background: var(--bg-main);
+  border-radius: 24px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.5);
+  position: relative; overflow-y: auto;
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-modal-overlay.active .cert-modal-container {
+  transform: scale(1) translateY(0);
+}
+
+.cert-modal-close {
+  position: absolute; top: 18px; right: 20px; z-index: 10;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--bg-elevated); border: 1px solid var(--card-border);
+  color: var(--text-main); font-size: 22px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none !important; transition: all 0.25s ease;
+}
+
+.cert-modal-close:hover {
+  background: var(--red-primary); color: #050505; border-color: var(--red-primary);
+  transform: rotate(90deg);
+}
+
+/* Certificate Render Frame inside Viewer */
+.cert-paper {
+  background: var(--bg-subtle);
+  border: 12px solid var(--bg-elevated); margin: 20px; border-radius: 16px;
+  padding: 44px 36px; position: relative; text-align: center;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.02);
+}
+
+.cert-paper-border {
+  border: 2px double var(--red-primary);
+  padding: 32px 24px; border-radius: 8px;
+}
+
+.cert-paper-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px; gap: 16px;
+}
+
+.cert-paper-badge {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .08em; color: var(--red-primary); text-transform: uppercase;
+}
+
+.cert-paper-subtitle {
+  font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle);
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; font-weight: 600;
+}
+
+.cert-paper-title {
+  font-family: var(--font-heading); font-size: 26px; font-weight: 700;
+  color: var(--text-main); margin-bottom: 16px; line-height: 1.3;
+}
+
+.cert-paper-recipient-label {
+  font-size: 13.5px; color: var(--text-subtle); margin-bottom: 6px;
+}
+
+.cert-paper-recipient {
+  font-family: var(--font-serif); font-size: 34px; font-weight: 700;
+  color: var(--red-primary); margin-bottom: 16px; letter-spacing: -0.01em;
+}
+
+.cert-paper-body {
+  font-size: 14.5px; color: var(--text-muted); max-width: 600px; margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+.cert-paper-footer {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding-top: 24px; border-top: 1px solid var(--card-border); gap: 16px; flex-wrap: wrap;
+}
+
+.cert-seal-box {
+  display: flex; align-items: center; gap: 10px; text-align: left;
+}
+
+.cert-seal-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--red-light); border: 2px solid var(--red-primary);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--red-primary); flex-shrink: 0;
+}
+
+.cert-sign-text {
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle);
+}
+
+.cert-modal-actions {
+  display: flex; gap: 12px; justify-content: center; padding: 0 24px 24px;
+}
+
+/* ============================= HOBBIES & GAMING PROFILE ============================= */
+.hobby-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+
+.hobby-card {
+  background: var(--card-bg); backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 34px 28px;
+  box-shadow: var(--shadow-sm); transition: all 0.35s ease;
+  position: relative; overflow: hidden;
+}
+.hobby-card:hover { transform: translateY(-5px); border-color: var(--line-c-strong); box-shadow: 0 16px 32px var(--red-glow); }
+
+.hobby-card-photo {
+  border-color: var(--line-c-strong);
+  background: linear-gradient(145deg, var(--card-bg), var(--red-light));
+  cursor: none !important;
+}
+
+.hobby-card-gaming {
+  border-color: var(--line-c-strong);
+  background: linear-gradient(145deg, var(--card-bg), var(--red-light));
+  cursor: none !important;
+}
+
+.gaming-badge {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  padding: 4px 10px; border-radius: var(--radius-full);
+  background: var(--bg-elevated); border: 1px solid var(--card-border);
+  color: var(--text-main); white-space: nowrap;
+}
+
+.gaming-metrics-box {
+  background: var(--bg-subtle); border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm); padding: 12px; display: flex; flex-direction: column; gap: 8px; margin-top: 12px;
+}
+
+.gmetric-row { display: flex; flex-direction: column; gap: 3px; }
+.gmetric-head {
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--text-muted); font-weight: 600;
+}
+.gmetric-bar {
+  width: 100%; height: 5px; background: var(--card-border); border-radius: 4px; overflow: hidden;
+}
+.gmetric-fill {
+  height: 100%; background: var(--red-gradient); border-radius: 4px;
+}
+
+.mini-photo-preview-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;
+  border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--card-border);
+  background: var(--bg-subtle); padding: 4px; margin-top: 12px;
+}
+.mini-photo-preview-grid img {
+  width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+.hobby-card-photo:hover .mini-photo-preview-grid img {
+  transform: scale(1.06);
+}
+
+.hobby-emoji { font-size: 32px; margin-bottom: 16px; }
+.hobby-name { font-family: var(--font-heading); font-weight: 700; font-size: 18px; margin-bottom: 6px; color: var(--text-main); }
+.hobby-desc { font-size: 14px; color: var(--text-muted); }
+
+/* Photography Roller Lightbox Overlay Modal */
+.photo-modal-overlay {
+  position: fixed; inset: 0; z-index: 10001;
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 30px; opacity: 0; pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-modal-overlay.active {
+  opacity: 1; pointer-events: auto;
+}
+
+.photo-roller-container {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; height: 75vh; gap: 20px; position: relative; margin-top: 20px;
+}
+
+.roller-stage {
+  flex: 1; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; position: relative;
+}
+
+.roller-img-wrap {
+  max-width: 100%; max-height: 82%; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.roller-img-wrap img {
+  max-width: 100%; max-height: 70vh; object-fit: contain; display: block;
+}
+
+.roller-caption-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 920px; margin-top: 16px; padding: 12px 24px;
+  background: rgba(20, 20, 22, 0.88); border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full); backdrop-filter: blur(12px); gap: 16px;
+}
+
+.roller-title {
+  font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: #FFFFFF;
+}
+
+.roller-loc {
+  font-family: var(--font-mono); font-size: 12px; color: var(--red-primary); font-weight: 600;
+}
+
+.roller-actions {
+  display: flex; align-items: center; gap: 14px;
+}
+
+.roller-counter {
+  font-family: var(--font-mono); font-size: 12.5px; color: #A1A1AA; font-weight: 600;
+}
+
+.roller-nav-btn {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF; display: flex; align-items: center; justify-content: center;
+  cursor: none !important; transition: all 0.25s ease; flex-shrink: 0;
+}
+
+.roller-nav-btn:hover {
+  background: var(--red-primary); color: #050505; border-color: var(--red-primary);
+  transform: scale(1.1); box-shadow: 0 0 24px var(--red-glow);
+}
+
+.roller-thumb-reel {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 10px 0; overflow-x: auto; max-width: 100%;
+}
+
+.roller-thumb {
+  width: 68px; height: 48px; border-radius: 8px; overflow: hidden;
+  border: 2px solid transparent; opacity: 0.5; cursor: none !important;
+  transition: all 0.25s ease; flex-shrink: 0;
+}
+
+.roller-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.roller-thumb.active, .roller-thumb:hover {
+  opacity: 1; border-color: var(--red-primary); transform: scale(1.08);
+  box-shadow: 0 0 16px var(--red-glow);
+}
+
+/* ============================= CONTACT PANEL ============================= */
+.contact-panel {
+  background: var(--bg-main); border: 1px solid var(--card-border); border-radius: var(--radius-lg);
+  padding: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
+  position: relative; overflow: hidden; box-shadow: var(--shadow-md);
+}
+.contact-list { display: flex; flex-direction: column; gap: 24px; }
+.contact-row { display: flex; align-items: center; gap: 16px; }
+.contact-icon {
+  width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid var(--line-c-strong);
+  display: flex; align-items: center; justify-content: center; color: var(--red-primary);
+  background: var(--red-light); flex-shrink: 0; box-shadow: 0 4px 14px var(--red-glow);
+}
+.contact-k { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); letter-spacing: .08em; font-weight: 600; }
+.contact-v { font-size: 15.5px; color: var(--text-main); font-weight: 600; }
+.contact-v a:hover { color: var(--red-primary); }
+
+.form-field { margin-bottom: 18px; }
+.form-field label { display: block; font-family: var(--font-mono); font-size: 11.5px; color: var(--text-subtle); letter-spacing: .06em; margin-bottom: 8px; font-weight: 600; }
+.form-field input, .form-field textarea {
+  width: 100%; background: var(--bg-subtle); border: 1px solid var(--card-border); border-radius: var(--radius-sm);
+  padding: 14px 18px; color: var(--text-main); font-family: var(--font-body); font-size: 14.5px;
+  transition: all 0.25s ease;
+}
+.form-field input:focus, .form-field textarea:focus {
+  outline: none; border-color: var(--red-primary); box-shadow: 0 0 0 3.5px var(--red-light); background: var(--bg-main);
+}
+.form-field textarea { resize: vertical; min-height: 100px; }
+
+/* ============================= FOOTER ============================= */
+footer {
+  padding: 48px 0 60px; text-align: center; position: relative; z-index: 2;
+  border-top: 1px solid var(--card-border);
+}
+footer p { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-subtle); font-weight: 500; }
+
+/* REVEAL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s cubic-bezier(0.16, 1, 0.3, 1), transform .75s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.show { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-left.show { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-right.show { opacity: 1; transform: translateX(0); }
+
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .skill-grid, .cert-grid, .hobby-grid { grid-template-columns: 1fr; }
+  .project-cols { grid-template-columns: 1fr; }
+  .contact-panel { grid-template-columns: 1fr; padding: 36px; }
+  .trace-rail { left: 18px; }
+  .node { padding-left: 36px; }
+  .node-pad { left: 18px; }
+  .dock-container { bottom: 12px; }
+  .floating-dock { gap: 2px; padding: 6px 10px; }
+  .dock-item { width: 38px; height: 38px; }
+  .cert-paper { padding: 24px 16px; margin: 10px; }
+  .cert-paper-title { font-size: 20px; }
+  .cert-paper-recipient { font-size: 26px; }
+  .photo-roller-container { height: 60vh; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============================= NAV ============================= -->
-<header class="nav">
+<!-- Ambient Glow Orbs -->
+<div class="ambient-glow">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+
+<!-- Spotlight Background Overlay -->
+<div class="spotlight-overlay" id="spotlightOverlay"></div>
+
+<!-- Custom Circular Magnetic Cursor -->
+<div class="custom-cursor" id="cursorRing"></div>
+<div class="custom-cursor-dot" id="cursorDot"></div>
+
+<!-- CERTIFICATE LIGHTBOX VIEWER MODAL -->
+<div class="cert-modal-overlay" id="certModal" aria-hidden="true">
+  <div class="cert-modal-container">
+    <button class="cert-modal-close" id="certModalClose" aria-label="Close Viewer">&times;</button>
+    <div id="certModalContent"></div>
+  </div>
+</div>
+
+<!-- STRATEGIC GAMING PROFILE LIGHTBOX MODAL -->
+<div class="cert-modal-overlay" id="gamingModal" aria-hidden="true">
+  <div class="cert-modal-container" style="max-width: 900px;">
+    <button class="cert-modal-close" id="gamingModalClose" aria-label="Close Profile">&times;</button>
+    <div style="padding: 36px 32px;">
+      <div style="text-align:center; margin-bottom: 28px;">
+        <div class="cert-paper-badge" style="display:inline-block; margin-bottom:8px;">STRATEGY &amp; TACTICAL PLAYBOOK</div>
+        <h2 style="font-family:var(--font-heading); font-size:30px; font-weight:700; color:var(--text-main);">Tactical Gaming &amp; Engineering Parallels 🎮</h2>
+        <p style="font-size:14.5px; color:var(--text-muted); max-width:600px; margin:8px auto 0;">How strategic gaming sharpens high-pressure execution, spatial logic, and complex system optimization.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 28px;">
+        <!-- VALORANT LIVE COMPETITIVE TRACKER STATS -->
+        <div style="grid-column: 1 / -1; background: linear-gradient(135deg, var(--red-light), var(--bg-subtle)); border:1px solid var(--line-c-strong); border-radius:20px; padding:24px; position:relative; overflow:hidden;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="font-size:32px;">🎯</span>
+              <div>
+                <div style="font-family:var(--font-heading); font-weight:700; font-size:22px; color:var(--text-main);">Valorant — Competitive Performance</div>
+                <div style="font-family:var(--font-mono); font-size:12px; color:var(--red-primary); font-weight:600;">Level 90 · Premier Team: The leagends #ACE (South Asia: Advanced 1)</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <span class="gaming-badge" style="background:var(--red-primary); color:#050505; font-weight:700; font-size:12px;">🏆 Peak: Platinum 1</span>
+              <span class="gaming-badge" style="background:var(--red-light); color:var(--red-primary); border-color:var(--line-c-strong); font-size:12px;">Current: Gold 1</span>
+            </div>
+          </div>
+
+          <!-- TRACKER METRICS GRID -->
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; margin-top:16px;">
+            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:14px 12px; text-align:center;">
+              <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-subtle); font-weight:600; letter-spacing:.05em;">PEAK RATING</div>
+              <div style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--red-primary); margin-top:3px;">Platinum 1</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Act III Peak</div>
+            </div>
+
+            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:14px 12px; text-align:center;">
+              <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-subtle); font-weight:600; letter-spacing:.05em;">HEADSHOT %</div>
+              <div style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--text-main); margin-top:3px;">21.9%</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Top 41.0% Aim</div>
+            </div>
+
+            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:14px 12px; text-align:center;">
+              <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-subtle); font-weight:600; letter-spacing:.05em;">TOTAL KILLS</div>
+              <div style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--text-main); margin-top:3px;">1,028</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Top 25.0% Kills</div>
+            </div>
+
+            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:14px 12px; text-align:center;">
+              <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-subtle); font-weight:600; letter-spacing:.05em;">CLUTCHES &amp; ACES</div>
+              <div style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--red-primary); margin-top:3px;">8 Aces</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">54 Flawless Rounds</div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-family:var(--font-mono); font-size:12px; color:var(--text-muted); margin-top:16px; padding-top:12px; border-top:1px solid var(--card-border);">
+            <span>⚡ ACS: <strong style="color:var(--text-main);">200.7</strong></span>
+            <span>🎯 First Bloods: <strong style="color:var(--text-main);">143</strong></span>
+            <span>📊 Damage / Round: <strong style="color:var(--text-main);">135.6</strong></span>
+            <span>⏱️ Playtime: <strong style="color:var(--text-main);">38h (69 Matches)</strong></span>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-subtle); border:1px solid var(--card-border); border-radius:16px; padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-family:var(--font-heading); font-weight:700; font-size:18px; color:var(--text-main);">⛏️ Minecraft</span>
+            <span class="gaming-badge" style="background:var(--red-light); color:var(--red-primary); border-color:var(--line-c-strong);">Redstone &amp; Circuit Logic</span>
+          </div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.5;">Building complex Redstone logic gates, automated farms, and 3D structural planning — digital logic hardware precursor.</p>
+        </div>
+
+        <div style="background:var(--bg-subtle); border:1px solid var(--card-border); border-radius:16px; padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-family:var(--font-heading); font-weight:700; font-size:18px; color:var(--text-main);">⚔️ Ghost of Tsushima</span>
+            <span class="gaming-badge" style="background:var(--red-light); color:var(--red-primary); border-color:var(--line-c-strong);">🏆 100% Completed</span>
+          </div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.5;">Stance switching dynamics and precise parry timing — training patience, rhythm, and split-second counter-attacks.</p>
+        </div>
+
+        <div style="background:var(--bg-subtle); border:1px solid var(--card-border); border-radius:16px; padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-family:var(--font-heading); font-weight:700; font-size:18px; color:var(--text-main);">🪓 God of War (2018)</span>
+            <span class="gaming-badge" style="background:var(--red-light); color:var(--red-primary); border-color:var(--line-c-strong);">🏆 100% Completed</span>
+          </div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.5;">Combo chaining, cooldown resource management, and decoding complex enemy attack patterns under pressure.</p>
+        </div>
+
+        <div style="background:var(--bg-subtle); border:1px solid var(--card-border); border-radius:16px; padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-family:var(--font-heading); font-weight:700; font-size:18px; color:var(--text-main);">🏙️ Cyberpunk 2077</span>
+            <span class="gaming-badge" style="background:var(--red-light); color:var(--red-primary); border-color:var(--line-c-strong);">Sci-Fi &amp; Cyberware</span>
+          </div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.5;">Exploring high-tech sci-fi systems, neural cyberware upgrades, and system hacking mechanics.</p>
+        </div>
+
+        <div style="background:var(--bg-subtle); border:1px solid var(--card-border); border-radius:16px; padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-family:var(--font-heading); font-weight:700; font-size:18px; color:var(--text-main);">♟️ Chess</span>
+            <span class="gaming-badge" style="background:var(--red-light); color:var(--red-primary); border-color:var(--line-c-strong);">Pure Tactical Strategy</span>
+          </div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.5;">Long-horizon calculation, analyzing multi-move decision trees, and positional strategy.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <button onclick="closeGamingModal()" class="btn btn-ghost" style="padding:10px 24px; font-size:12.5px;">Close Gaming Profile</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOGRAPHY ROLLER LIGHTBOX MODAL -->
+<div class="photo-modal-overlay" id="photoModal" aria-hidden="true">
+  <button class="cert-modal-close" id="photoModalClose" aria-label="Close Gallery">&times;</button>
+  
+  <div class="photo-roller-container">
+    <button class="roller-nav-btn prev" id="photoPrevBtn" aria-label="Previous Photo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+
+    <div class="roller-stage" id="rollerStage">
+      <div class="roller-img-wrap" id="rollerImgWrap">
+        <img id="rollerImg" src="" alt="Sujal Singh Photography">
+      </div>
+      <div class="roller-caption-bar">
+        <div>
+          <div class="roller-title" id="rollerTitle">Photo Title</div>
+          <div class="roller-loc" id="rollerLoc">Location</div>
+        </div>
+        <div class="roller-actions">
+          <button id="playPauseBtn" onclick="toggleSlideshow()" class="btn btn-ghost" style="padding:6px 14px; font-size:11.5px; border-radius:50px;">
+            ▶️ Auto Slideshow
+          </button>
+          <span class="roller-counter" id="rollerCounter">01 / 10</span>
+          <a id="rollerDownloadBtn" href="" download class="btn btn-primary" style="padding:8px 18px; font-size:12px;">
+            Download 📥
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <button class="roller-nav-btn next" id="photoNextBtn" aria-label="Next Photo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="roller-thumb-reel" id="rollerThumbReel"></div>
+</div>
+
+<!-- FLOATING DOCK NAVIGATION SCROLLER (macOS Style with Dark Mode Switch) -->
+<div class="dock-container">
+  <nav class="floating-dock" id="floatingDock">
+    <a href="#hero" class="dock-item active" data-section="hero">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="dock-tooltip">Home</span>
+    </a>
+    <a href="#about" class="dock-item" data-section="about">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="dock-tooltip">About</span>
+    </a>
+    <a href="#skills" class="dock-item" data-section="skills">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span class="dock-tooltip">Skills</span>
+    </a>
+    <a href="#experience" class="dock-item" data-section="experience">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <span class="dock-tooltip">Experience</span>
+    </a>
+    <a href="#projects" class="dock-item" data-section="projects">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      <span class="dock-tooltip">Projects</span>
+    </a>
+    <a href="#certifications" class="dock-item" data-section="certifications">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l9-4l-9-4l2 3z"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span class="dock-tooltip">Certifications</span>
+    </a>
+    <a href="#education" class="dock-item" data-section="education">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      <span class="dock-tooltip">Education</span>
+    </a>
+    <a href="#hobbies" class="dock-item" data-section="hobbies">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <span class="dock-tooltip">Interests &amp; Gaming</span>
+    </a>
+    <a href="#contact" class="dock-item" data-section="contact">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span class="dock-tooltip">Contact</span>
+    </a>
+
+    <div class="dock-divider"></div>
+
+    <button class="dock-item" id="themeToggle" aria-label="Toggle Theme">
+      <svg id="themeSun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="themeMoon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <span class="dock-tooltip">Toggle Theme</span>
+    </button>
+  </nav>
+</div>
+
+<!-- NAVIGATION -->
+<header class="nav" id="mainNav">
   <div class="nav-inner">
-    <a href="#hero" class="logo"><span class="logo-chip">SS</span> SUJAL.SINGH</a>
+    <a href="#hero" class="logo">
+      <span class="logo-chip">SS</span> SUJAL.SINGH
+    </a>
     <nav class="navlinks" id="navlinks">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
       <a href="#education">Education</a>
+      <a href="#hobbies">Interests</a>
       <a href="#contact">Contact</a>
     </nav>
     <a href="#contact" class="nav-cta">Let's Connect</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<!-- ============================= HERO ============================= -->
+<!-- HERO SECTION -->
 <section class="hero" id="hero">
   <div class="wrap">
     <div>
-      <div class="eyebrow">EE Undergraduate — RTU Kota</div>
-      <h1 class="headline">Sujal<br>Singh<span class="accent">.</span></h1>
-      <div class="typewrap"><span id="typeTarget"></span><span class="cursor"></span></div>
+      <div class="status-badge">
+        <span class="status-dot"></span> Available for Internships &amp; Projects
+      </div>
+      <h1 class="headline">
+        Sujal<br>Singh<span class="accent-gradient">.</span>
+      </h1>
+      <div class="typewrap">
+        <span id="typeTarget"></span><span class="cursor"></span>
+      </div>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="Sujal_Resume.pdf" class="btn btn-ghost" id="resumeBtn" target="_blank" rel="noopener noreferrer">Download Resume</a>
+        <a href="#projects" class="btn btn-primary">
+          View Projects
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="Sujal_Resume.pdf" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+          Download Resume
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        </a>
         <a href="#contact" class="btn btn-ghost">Let's Connect</a>
       </div>
     </div>
+
     <div class="hero-visual">
       <div class="orbit-ring"></div>
       <div class="orbit-ring r2"></div>
-      <div class="chip-core"><img src="sujal-photo.jpg" alt="Sujal Singh"></div>
+      <div class="chip-core">
+        <img src="sujal-photo.jpg" alt="Sujal Singh — Electrical Engineering">
+      </div>
       <div class="badge b1">⚙ Arduino</div>
       <div class="badge b2">📈 MATLAB</div>
       <div class="badge b3">🔁 Simulink</div>
@@ -591,342 +1353,1044 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   </div>
 </section>
 
-<!-- trace rail spans the whole content body -->
+<!-- MAIN CONTENT WRAPPER WITH PCB TRACE RAIL -->
 <div style="position:relative;">
-<div class="trace-rail" id="traceRail" style="top:0;"></div>
+  <div class="trace-rail" id="traceRail"></div>
 
-<!-- ============================= ABOUT ============================= -->
-<section class="section-pad node" id="about">
-  <span class="node-pad"></span>
-  <span class="designator">U2 — PROFILE</span>
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="reveal-left">
-        <div class="sec-head" style="margin-bottom:22px;">
-          <div class="sec-eyebrow">About</div>
-          <h2 class="sec-title">Hello, I'm Sujal <span class="dim">👋</span></h2>
+  <!-- ABOUT SECTION -->
+  <section class="section-pad node" id="about">
+    <span class="node-pad"></span>
+    <span class="designator">U2 — PROFILE</span>
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal-left">
+          <div class="sec-head">
+            <div class="sec-eyebrow">About Me</div>
+            <h2 class="sec-title">Engineering at the intersection of hardware &amp; code <span class="dim">⚡</span></h2>
+          </div>
+          <div class="about-text">
+            <p>I'm an Electrical Engineering undergraduate who enjoys taking systems apart to understand how electrons and algorithms collaborate. Somewhere between breadboard wire setups and MATLAB simulation models, I found my sweet spot: building hardware logic that interacts seamlessly with the physical world.</p>
+            <br>
+            <p>Currently focusing on embedded systems, SCADA automation, renewable energy, and smart motor controls — building robust prototypes one iteration at a time.</p>
+          </div>
         </div>
-        <div class="about-text">
-          <p>I'm an Electrical Engineering undergraduate who likes taking things apart to see how the current actually flows. Somewhere between a breadboard and a MATLAB script, I found the spot where hardware meets logic — motors that respond to a phone tap, circuits that make decisions, systems that quietly work.</p>
-          <br>
-          <p>Right now I'm building toward internships in embedded systems, renewable energy, and smart automation — one prototype at a time.</p>
-        </div>
-      </div>
-      <div class="stats reveal-right">
-        <div class="stat"><div class="stat-label">TP01 · YEARS</div><div class="stat-num">2+</div><div class="stat-desc">Years learning EE</div></div>
-        <div class="stat"><div class="stat-label">TP02 · INTERN</div><div class="stat-num">2</div><div class="stat-desc">Internships completed</div></div>
-        <div class="stat"><div class="stat-label">TP03 · SKILLS</div><div class="stat-num">5+</div><div class="stat-desc">Engineering skills</div></div>
-        <div class="stat"><div class="stat-label">TP04 · BUILDS</div><div class="stat-num">1+</div><div class="stat-desc">Projects built</div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ============================= SKILLS ============================= -->
-<section class="section-pad node" id="skills">
-  <span class="node-pad"></span>
-  <span class="designator">R-ARRAY — SKILLS</span>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow">Toolkit</div>
-      <h2 class="sec-title">What I build with</h2>
-    </div>
-    <div class="skill-grid reveal">
-      <div class="skill-card">
-        <span class="skill-tag">U1</span>
-        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
-        <div class="skill-name">Embedded C</div>
-        <div class="skill-desc">Writing firmware that talks directly to hardware.</div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-tag">U2</span>
-        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M4 9h5M4 15h5M15 9h5M15 15h5"/></svg>
-        <div class="skill-name">Arduino</div>
-        <div class="skill-desc">Prototyping microcontroller-driven systems fast.</div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-tag">R1</span>
-        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h3l2-7 4 14 2-9 2 5h5"/></svg>
-        <div class="skill-name">Simulink</div>
-        <div class="skill-desc">Modeling and simulating dynamic systems before I build them.</div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-tag">C1</span>
-        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h6M4 17h6M14 4v16M18 4v6M18 14v6"/><circle cx="10" cy="7" r="1.3" fill="currentColor" stroke="none"/><circle cx="10" cy="17" r="1.3" fill="currentColor" stroke="none"/></svg>
-        <div class="skill-name">Circuit Design</div>
-        <div class="skill-desc">Analysis, schematics, and hands-on debugging.</div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-tag">SW1</span>
-        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
-        <div class="skill-name">Workflow Automation</div>
-        <div class="skill-desc">Connecting tools and APIs with n8n to remove busywork.</div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-tag">D1</span>
-        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="9" r="1.3" fill="currentColor" stroke="none"/><circle cx="9" cy="14" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.3" fill="currentColor" stroke="none"/></svg>
-        <div class="skill-name">Canva</div>
-        <div class="skill-desc">Visual design for content and personal branding.</div>
+        <div class="stats-grid reveal-right">
+          <div class="stat-card">
+            <div class="stat-label">TP01 · ACADEMICS</div>
+            <div class="stat-num">2+</div>
+            <div class="stat-desc">Years learning EE</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">TP02 · EXPERIENCE</div>
+            <div class="stat-num">2</div>
+            <div class="stat-desc">Internships completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">TP03 · CREDENTIALS</div>
+            <div class="stat-num">5</div>
+            <div class="stat-desc">Certified courses &amp; credentials</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">TP04 · GALLERY</div>
+            <div class="stat-num">10</div>
+            <div class="stat-desc">Featured photos</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="soft-row reveal">
-      <span class="soft-pill">Communication</span>
-      <span class="soft-pill">Team Collaboration</span>
-      <span class="soft-pill">Problem Solving</span>
-      <span class="soft-pill">Time Management</span>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================= EXPERIENCE ============================= -->
-<section class="section-pad node" id="experience">
-  <span class="node-pad"></span>
-  <span class="designator">TL1 — EXPERIENCE</span>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow">Experience</div>
-      <h2 class="sec-title">Where I've worked</h2>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-date">Summer Internship · 45 Days</div>
-      <div class="tl-role">SCADA Systems Trainee</div>
-      <div class="tl-org">NPCIL (Nuclear Power Corporation of India Ltd.) · Rawatbhata, Rajasthan</div>
-      <ul class="tl-list">
-        <li>Trained on SCADA systems used for real-time monitoring and control of plant operations.</li>
-        <li>Studied data acquisition, control room architecture, and process automation at a nuclear power facility.</li>
-        <li>Gained exposure to instrumentation, sensor networks, and industrial-grade safety and control standards.</li>
-      </ul>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-date">Jun 2025 — Jun 2025</div>
-      <div class="tl-role">Electrical Engineering Intern</div>
-      <div class="tl-org">Western Central Railway · Kota, Rajasthan</div>
-      <ul class="tl-list">
-        <li>Gained hands-on exposure to power distribution and railway infrastructure maintenance.</li>
-        <li>Observed and assisted with signaling systems, traction motors, and control circuits.</li>
-        <li>Connected classroom fundamentals — circuit analysis, embedded systems, energy efficiency — to real infrastructure.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+  <!-- SKILLS SECTION -->
+  <section class="section-pad node" id="skills">
+    <span class="node-pad"></span>
+    <span class="designator">R-ARRAY — SKILLS</span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">Technical Toolkit</div>
+        <h2 class="sec-title">Core capabilities &amp; engineering stack</h2>
+      </div>
 
-<!-- ============================= PROJECTS ============================= -->
-<section class="section-pad node" id="projects">
-  <span class="node-pad"></span>
-  <span class="designator">D1 — FEATURED BUILD</span>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow">Projects</div>
-      <h2 class="sec-title">Featured build</h2>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-hero-viz">
-        <img src="car.png" alt="Bluetooth controlled car prototype built with Arduino">
-      </div>
-      <div class="project-title-row">
-        <div class="project-title">Bluetooth Controlled Car</div>
-        <div class="project-date">Feb 2025</div>
-      </div>
-      <p style="color:var(--muted); max-width:60ch;">A smartphone-controlled car prototype built to explore wireless embedded control end-to-end — from motor driver circuit to mobile app.</p>
-      <div class="tech-tags">
-        <span class="tech-tag">Arduino</span>
-        <span class="tech-tag">HC-05 Bluetooth</span>
-        <span class="tech-tag">Embedded C</span>
-        <span class="tech-tag">Motor Driver</span>
-        <span class="tech-tag">Android App</span>
-      </div>
-      <div class="project-cols">
-        <div class="pcol">
-          <div class="pcol-h">Features</div>
-          <ul>
-            <li>Real-time directional control over Bluetooth</li>
-            <li>Arduino integrated with a motor driver circuit</li>
-            <li>Custom mobile app interface for commands</li>
-          </ul>
+      <div class="skill-grid reveal">
+        <div class="skill-card">
+          <span class="skill-tag">U1</span>
+          <div class="skill-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
+          </div>
+          <div class="skill-name">Embedded C</div>
+          <div class="skill-desc">Writing high-efficiency firmware and low-level drivers that talk directly to hardware registers.</div>
         </div>
-        <div class="pcol">
-          <div class="pcol-h">Challenges</div>
-          <ul>
-            <li>Reducing command-to-motor response latency</li>
-            <li>Keeping the Bluetooth pairing stable during testing</li>
-          </ul>
-        </div>
-        <div class="pcol">
-          <div class="pcol-h">What I learned</div>
-          <ul>
-            <li>Translating circuit theory into working hardware</li>
-            <li>Debugging as a team, end to end</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ============================= EDUCATION ============================= -->
-<section class="section-pad node" id="education">
-  <span class="node-pad"></span>
-  <span class="designator">Y1 — EDUCATION</span>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow">Education</div>
-      <h2 class="sec-title">Academic path</h2>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-date">Sep 2024 — Present</div>
-      <div class="tl-role">B.Tech, Electrical Engineering</div>
-      <div class="tl-org">Rajasthan Technical University · Kota</div>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-date">Apr 2022 — May 2024</div>
-      <div class="tl-role">Higher Secondary Education, Science</div>
-      <div class="tl-org">Akshay Public School · Kota</div>
-    </div>
-  </div>
-</section>
+        <div class="skill-card">
+          <span class="skill-tag">U2</span>
+          <div class="skill-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M4 9h5M4 15h5M15 9h5M15 15h5"/></svg>
+          </div>
+          <div class="skill-name">Arduino Prototyping</div>
+          <div class="skill-desc">Rapidly testing sensor integration, motor drivers, and wireless communication protocols.</div>
+        </div>
 
-<!-- ============================= HOBBIES ============================= -->
-<section class="section-pad node" id="hobbies">
-  <span class="node-pad"></span>
-  <span class="designator">SW1 — OFF-DUTY</span>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow">Beyond engineering</div>
-      <h2 class="sec-title">What I do off the clock</h2>
-    </div>
-    <div class="hobby-grid reveal">
-      <div class="hobby-card">
-        <div class="hobby-emoji">📸</div>
-        <div class="hobby-name">Photography</div>
-        <div class="hobby-desc">Framing light and geometry outside the lab.</div>
-      </div>
-      <div class="hobby-card">
-        <div class="hobby-emoji">🎮</div>
-        <div class="hobby-name">Strategic Gaming</div>
-        <div class="hobby-desc">Long-horizon strategy games — the same patience circuit design asks for.</div>
-      </div>
-      <div class="hobby-card">
-        <div class="hobby-emoji">✈️</div>
-        <div class="hobby-name">Traveling</div>
-        <div class="hobby-desc">New places, new problems worth paying attention to.</div>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="skill-card">
+          <span class="skill-tag">R1</span>
+          <div class="skill-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h3l2-7 4 14 2-9 2 5h5"/></svg>
+          </div>
+          <div class="skill-name">Simulink &amp; MATLAB</div>
+          <div class="skill-desc">Modeling, simulating dynamic power systems, and analyzing control loops before hardware fabrication.</div>
+        </div>
 
-<!-- ============================= CONTACT ============================= -->
-<section class="section-pad node" id="contact">
-  <span class="node-pad"></span>
-  <span class="designator">J1 — CONTACT</span>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow">Get in touch</div>
-      <h2 class="sec-title">Let's build something</h2>
-    </div>
-    <div class="contact-panel reveal">
-      <div class="contact-list">
-        <div class="contact-row">
-          <div class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-          <div><div class="contact-k">PHONE</div><div class="contact-v"><a href="tel:+917850062010">+91 78500 62010</a></div></div>
+        <div class="skill-card">
+          <span class="skill-tag">C1</span>
+          <div class="skill-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h6M4 17h6M14 4v16M18 4v6M18 14v6"/><circle cx="10" cy="7" r="1.3" fill="currentColor" stroke="none"/><circle cx="10" cy="17" r="1.3" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="skill-name">Circuit Design &amp; Testing</div>
+          <div class="skill-desc">Schematic analysis, power distribution, and hands-on oscilloscope &amp; multimeter debugging.</div>
         </div>
-        <div class="contact-row">
-          <div class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
-          <div><div class="contact-k">EMAIL</div><div class="contact-v"><a href="mailto:Sujalsingh2k25@gmail.com">Sujalsingh2k25@gmail.com</a></div></div>
+
+        <div class="skill-card">
+          <span class="skill-tag">SW1</span>
+          <div class="skill-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+          </div>
+          <div class="skill-name">Workflow Automation</div>
+          <div class="skill-desc">Automating data pipelines and connecting engineering workflows using n8n and modern APIs.</div>
         </div>
-        <div class="contact-row">
-          <div class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-          <div><div class="contact-k">LINKEDIN</div><div class="contact-v"><a href="https://www.linkedin.com/in/sujalsingh3955/" id="linkedinLink" target="_blank" rel="noopener noreferrer">linkedin.com/in/sujalsingh3955</a></div></div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><div class="contact-k">LOCATION</div><div class="contact-v">Gumanpura, Kota, Rajasthan, India</div></div>
+
+        <div class="skill-card">
+          <span class="skill-tag">D1</span>
+          <div class="skill-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="9" r="1.3" fill="currentColor" stroke="none"/><circle cx="9" cy="14" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.3" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="skill-name">Visual Design (Canva)</div>
+          <div class="skill-desc">Crafting clear visual documentation, technical presentations, and branding material.</div>
         </div>
       </div>
-      <form id="contactForm">
-        <div class="form-field"><label for="cname">Name</label><input id="cname" type="text" placeholder="Your name" required></div>
-        <div class="form-field"><label for="cemail">Email</label><input id="cemail" type="email" placeholder="you@example.com" required></div>
-        <div class="form-field"><label for="cmsg">Message</label><textarea id="cmsg" placeholder="What are you building?" required></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send Message</button>
-      </form>
-    </div>
-  </div>
-</section>
 
-</div> <!-- end trace wrapper -->
+      <div class="soft-row reveal">
+        <span class="soft-pill">Technical Communication</span>
+        <span class="soft-pill">Cross-Functional Collaboration</span>
+        <span class="soft-pill">Root Cause Analysis</span>
+        <span class="soft-pill">Time Management</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE SECTION -->
+  <section class="section-pad node" id="experience">
+    <span class="node-pad"></span>
+    <span class="designator">TL1 — EXPERIENCE</span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">Work History</div>
+        <h2 class="sec-title">Industry experience &amp; field training</h2>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">May 19, 2026 — Jul 03, 2026 · 45 Days Industrial Training</div>
+        <div class="tl-role">SCADA &amp; Switchyard Equipment Trainee</div>
+        <div class="tl-org">Nuclear Power Corporation of India Ltd. (NPCIL) · Rawatbhata Rajasthan Site (Govt. of India Enterprise)</div>
+        <ul class="tl-list">
+          <li>Completed project work and practical training on <strong style="color:var(--text-main);">Study of Switchyard Equipments and SCADA Monitoring</strong> at NPCIL.</li>
+          <li>Trained on industrial SCADA architecture used for real-time monitoring and control of nuclear power generation plants.</li>
+          <li>Studied control room telemetry, high-voltage switchyard equipment, sensor networks, and safety interlock protocols.</li>
+        </ul>
+        <div style="margin-top:16px;">
+          <button onclick="openCertModal(0, 'original')" class="btn btn-ghost" style="padding:8px 18px; font-size:12px;">
+            View Official NPCIL Certificate (Ref: RR SITE/NPK/HR/2026/S/878) 🔍
+          </button>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Jun 2025 — Jun 2025</div>
+        <div class="tl-role">Electrical Engineering Intern</div>
+        <div class="tl-org">Western Central Railway · Kota, Rajasthan</div>
+        <ul class="tl-list">
+          <li>Gained hands-on experience in high-voltage power distribution and traction substations.</li>
+          <li>Assisted senior engineers in inspecting signaling relay circuits, traction motors, and safety systems.</li>
+          <li>Applied core academic principles — circuit protection, embedded logic, power efficiency — to railway infrastructure.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS SECTION -->
+  <section class="section-pad node" id="projects">
+    <span class="node-pad"></span>
+    <span class="designator">D1 — FEATURED BUILD</span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">Featured Work</div>
+        <h2 class="sec-title">Hardware &amp; embedded builds</h2>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-hero-viz">
+          <img src="car.png" alt="Bluetooth Controlled Car built with Arduino by Sujal Singh">
+        </div>
+
+        <div class="project-title-row">
+          <div class="project-title">Bluetooth Controlled Car Prototype</div>
+          <div class="project-date">Feb 2025</div>
+        </div>
+
+        <p style="color:var(--text-muted); max-width:62ch; font-size:16px;">
+          An end-to-end wireless embedded control system built to demonstrate real-time motor control over Bluetooth — connecting smartphone app commands directly to microcontroller hardware.
+        </p>
+
+        <div class="tech-tags">
+          <span class="tech-tag">Arduino Uno</span>
+          <span class="tech-tag">HC-05 Bluetooth Module</span>
+          <span class="tech-tag">Embedded C</span>
+          <span class="tech-tag">L298N Motor Driver</span>
+          <span class="tech-tag">Android Remote App</span>
+        </div>
+
+        <div class="project-cols">
+          <div class="pcol">
+            <div class="pcol-h">Key Features</div>
+            <ul>
+              <li>Low-latency real-time directional control via serial Bluetooth commands</li>
+              <li>PWM-based speed modulation integrated with dual H-bridge driver circuit</li>
+              <li>Custom mobile app layout designed for intuitive remote steering</li>
+            </ul>
+          </div>
+          <div class="pcol">
+            <div class="pcol-h">Technical Challenges</div>
+            <ul>
+              <li>Eliminating serial packet drop during rapid direction switches</li>
+              <li>Maintaining stable power delivery under high motor stall current</li>
+            </ul>
+          </div>
+          <div class="pcol">
+            <div class="pcol-h">Engineering Insights</div>
+            <ul>
+              <li>Translating theoretical circuit schematics into a durable working prototype</li>
+              <li>Hands-on experience in hardware debugging and signal isolation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS SECTION -->
+  <section class="section-pad node" id="certifications">
+    <span class="node-pad"></span>
+    <span class="designator">CERT — CREDENTIALS</span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">Certifications</div>
+        <h2 class="sec-title">Verified skilling &amp; professional credentials</h2>
+      </div>
+
+      <div class="cert-grid reveal">
+        <div class="cert-card" data-cert-index="0">
+          <div>
+            <div class="cert-badge">NPCIL · Govt of India Enterprise</div>
+            <div class="cert-title">Study of Switchyard Equipments and SCADA Monitoring</div>
+            <div class="cert-org">Nuclear Power Corporation of India Limited · Rawatbhata Rajasthan Site</div>
+            <div class="cert-desc">Official project training certificate for practical training on high-voltage switchyard equipment and industrial SCADA monitoring systems.</div>
+          </div>
+          <div class="cert-meta-row">
+            <span>Completed Jul 04, 2026</span>
+            <span class="view-cert-btn">View Certificate 🔍</span>
+          </div>
+        </div>
+
+        <div class="cert-card" data-cert-index="1">
+          <div>
+            <div class="cert-badge">Reliance Foundation &amp; Skill India</div>
+            <div class="cert-title">Green Mobility and Its Applications</div>
+            <div class="cert-org">Reliance Foundation Skilling Academy · Skill India Digital Hub (NSDC)</div>
+            <div class="cert-desc">Completed 90-hour intensive skilling course covering electric mobility, EV architectures, battery technology, and sustainable transportation.</div>
+          </div>
+          <div class="cert-meta-row">
+            <span>Completed Apr 19, 2026</span>
+            <span class="view-cert-btn">View Certificate 🔍</span>
+          </div>
+        </div>
+
+        <div class="cert-card" data-cert-index="2">
+          <div>
+            <div class="cert-badge">Coursera Project Certificate</div>
+            <div class="cert-title">Getting Started with Microsoft Excel</div>
+            <div class="cert-org">Coursera · Freedom Learning Group</div>
+            <div class="cert-desc">Hands-on project certification covering data structuring, analysis formulas, spreadsheet modeling, and engineering data organization.</div>
+          </div>
+          <div class="cert-meta-row">
+            <span>Completed Apr 15, 2026</span>
+            <span class="view-cert-btn">View Certificate 🔍</span>
+          </div>
+        </div>
+
+        <div class="cert-card" data-cert-index="3">
+          <div>
+            <div class="cert-badge">NASSCOM &amp; Skill India</div>
+            <div class="cert-title">IT Technical Support Executive</div>
+            <div class="cert-org">NASSCOM (IT - ITeS SSC) · Skill India Digital Hub</div>
+            <div class="cert-desc">Specialized training in IT technical support, hardware troubleshooting, system diagnostics, and IT service management protocols.</div>
+          </div>
+          <div class="cert-meta-row">
+            <span>Completed Jun 14, 2026</span>
+            <span class="view-cert-btn">View Certificate 🔍</span>
+          </div>
+        </div>
+
+        <div class="cert-card" data-cert-index="4">
+          <div>
+            <div class="cert-badge">Skill India Digital Hub</div>
+            <div class="cert-title">Personal Finance - Investment Options</div>
+            <div class="cert-org">G O BPO Services Pvt Ltd · Skill India Digital Hub</div>
+            <div class="cert-desc">Skilling course on personal financial planning, investment strategies, asset allocation, and wealth growth mechanisms.</div>
+          </div>
+          <div class="cert-meta-row">
+            <span>Completed May 16, 2026</span>
+            <span class="view-cert-btn">View Certificate 🔍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION SECTION -->
+  <section class="section-pad node" id="education">
+    <span class="node-pad"></span>
+    <span class="designator">Y1 — EDUCATION</span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">Education</div>
+        <h2 class="sec-title">Academic background</h2>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Sep 2024 — Present</div>
+        <div class="tl-role">B.Tech in Electrical Engineering</div>
+        <div class="tl-org">Rajasthan Technical University (RTU) · Kota, Rajasthan</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Apr 2022 — May 2024</div>
+        <div class="tl-role">Higher Secondary Education (Science Stream)</div>
+        <div class="tl-org">Akshay Public School · Kota, Rajasthan</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOBBIES & INTERESTS SECTION -->
+  <section class="section-pad node" id="hobbies">
+    <span class="node-pad"></span>
+    <span class="designator">SW1 — OFF-DUTY &amp; INSPIRATION</span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">Interests</div>
+        <h2 class="sec-title">What keeps me inspired</h2>
+      </div>
+
+      <div class="hobby-grid reveal">
+        <!-- FEATURED INTERACTIVE PHOTOGRAPHY CARD WITH SLIDESHOW PREVIEW -->
+        <div class="hobby-card hobby-card-photo" id="photoHobbyCard" onclick="openPhotoModal(0)">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div class="hobby-emoji" style="margin-bottom:0;">📸</div>
+            <span class="cert-badge" style="margin-bottom:0; font-size:10.5px;">Interactive Gallery ↗</span>
+          </div>
+          <div class="hobby-name">Photography</div>
+          <div class="hobby-desc" style="margin-bottom:14px;">Framing light, shadow, and architectural symmetry outside the engineering lab.</div>
+          
+          <!-- Mini Preview Grid -->
+          <div class="mini-photo-preview-grid" style="grid-template-columns: repeat(5, 1fr);">
+            <img src="photos/photo-1-palace-night.png" alt="Palace Night">
+            <img src="photos/photo-2-waterfall-valley.jpg" alt="Waterfall Valley">
+            <img src="photos/photo-3-snow-mountains.png" alt="Snow Mountains">
+            <img src="photos/photo-4-helicopter-mountains.jpg" alt="Helicopter">
+            <img src="photos/photo-5-lake-sunset.png" alt="Lake Sunset">
+            <img src="photos/photo-6-red-heritage-tower.png" alt="Heritage Tower">
+            <img src="photos/photo-7-haveli-moon.png" alt="Haveli Moon">
+            <img src="photos/photo-8-misty-lake-mono.png" alt="Misty Lake">
+            <img src="photos/photo-9-st-pauls-illuminated.jpg" alt="St Pauls Lights">
+            <img src="photos/photo-10-taj-mahal-palace-mumbai.jpg" alt="Taj Mahal Palace Mumbai">
+          </div>
+
+          <div style="margin-top:16px; font-family:var(--font-mono); font-size:12px; font-weight:600; color:var(--red-primary); display:flex; align-items:center; gap:6px;">
+            <span>Click to Open 3D Rolling Slideshow (10 Photos)</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <!-- FEATURED INTERACTIVE STRATEGIC GAMING CARD -->
+        <div class="hobby-card hobby-card-gaming" id="gamingHobbyCard" onclick="openGamingModal()">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div class="hobby-emoji" style="margin-bottom:0;">🎮</div>
+            <span class="cert-badge" style="margin-bottom:0; font-size:10.5px;">Tactical Profile ↗</span>
+          </div>
+          <div class="hobby-name">Strategic Gaming</div>
+          <div class="hobby-desc" style="margin-bottom:14px;">High-precision tactical strategy games that sharpen engineering logic, APM, and redstone circuit architecture.</div>
+          
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;">
+            <span class="gaming-badge">🎯 Valorant</span>
+            <span class="gaming-badge">⛏️ Minecraft</span>
+            <span class="gaming-badge">⚔️ Tsushima 🏆</span>
+            <span class="gaming-badge">🪓 GoW 2018 🏆</span>
+            <span class="gaming-badge">🏙️ Cyberpunk</span>
+            <span class="gaming-badge">♟️ Chess</span>
+          </div>
+
+          <div style="margin-top:16px; font-family:var(--font-mono); font-size:12px; font-weight:600; color:var(--red-primary); display:flex; align-items:center; gap:6px;">
+            <span>View Full Gaming Profile 🎮</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="section-pad node" id="contact">
+    <span class="node-pad"></span>
+    <span class="designator">J1 — CONTACT</span>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-eyebrow">Get In Touch</div>
+        <h2 class="sec-title">Let's build something remarkable together</h2>
+      </div>
+
+      <div class="contact-panel reveal">
+        <div class="contact-list">
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            </div>
+            <div>
+              <div class="contact-k">EMAIL</div>
+              <div class="contact-v"><a href="mailto:Sujalsingh2k25@gmail.com">Sujalsingh2k25@gmail.com</a></div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            </div>
+            <div>
+              <div class="contact-k">DISCORD</div>
+              <div class="contact-v"><a href="https://discord.com/users/ofcsujal" target="_blank" rel="noopener noreferrer">@ofcsujal</a></div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <div class="contact-k">LINKEDIN</div>
+              <div class="contact-v"><a href="https://www.linkedin.com/in/sujalsingh3955/" target="_blank" rel="noopener noreferrer">linkedin.com/in/sujalsingh3955</a></div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-k">LOCATION</div>
+              <div class="contact-v">Gumanpura, Kota, Rajasthan, India</div>
+            </div>
+          </div>
+        </div>
+
+        <form id="contactForm">
+          <div class="form-field">
+            <label for="cname">Name</label>
+            <input id="cname" type="text" placeholder="Your full name" required>
+          </div>
+          <div class="form-field">
+            <label for="cemail">Email Address</label>
+            <input id="cemail" type="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-field">
+            <label for="cmsg">Message</label>
+            <textarea id="cmsg" placeholder="Tell me about your project or opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
 
 <footer>
-  <p>// designed &amp; built by Sujal Singh — <span id="year"></span></p>
+  <div class="wrap">
+    <p>// Designed &amp; Crafted by Sujal Singh — <span id="year"></span></p>
+  </div>
 </footer>
 
 <script>
-// ---------- page load state ----------
+// Page load trigger
 window.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
 });
 
-// ---------- mobile nav ----------
-const navToggle = document.getElementById('navToggle');
-const navlinks = document.getElementById('navlinks');
-
-navToggle.addEventListener('click', ()=>{
-  navlinks.classList.toggle('open');
-  navToggle.classList.toggle('open');
-});
-
-document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click', ()=>{
-  navlinks.classList.remove('open');
-  navToggle.classList.remove('open');
-}));
-
-// ---------- footer year ----------
+// Footer year update
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// ---------- typewriter ----------
-const phrases = ["Embedded Systems", "Renewable Energy", "Smart Automation"];
+// Header scroll shadow effect
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('mainNav');
+  if (window.scrollY > 20) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Typewriter effect
+const phrases = ["Embedded Systems Firmware", "SCADA & Power Automation", "Smart Motor Controls", "Simulink & MATLAB Modeling"];
 const typeTarget = document.getElementById('typeTarget');
 let pi=0, ci=0, deleting=false;
+
 function typeLoop(){
   const word = phrases[pi];
   if(!deleting){
     ci++;
     typeTarget.textContent = word.slice(0, ci);
-    if(ci === word.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
+    if(ci === word.length){ deleting = true; setTimeout(typeLoop, 1600); return; }
   } else {
     ci--;
     typeTarget.textContent = word.slice(0, ci);
     if(ci === 0){ deleting = false; pi = (pi+1) % phrases.length; }
   }
-  setTimeout(typeLoop, deleting ? 40 : 75);
+  setTimeout(typeLoop, deleting ? 35 : 70);
 }
 typeLoop();
 
-// ---------- reveal on scroll ----------
-const revealEls = document.querySelectorAll('.reveal, .reveal-slide, .reveal-left, .reveal-right');
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('themeToggle');
+const themeSun = document.getElementById('themeSun');
+const themeMoon = document.getElementById('themeMoon');
+
+function setTheme(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+    themeSun.style.display = 'block';
+    themeMoon.style.display = 'none';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.body.classList.remove('dark-mode');
+    themeSun.style.display = 'none';
+    themeMoon.style.display = 'block';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  setTheme(true);
+} else {
+  setTheme(false);
+}
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.contains('dark-mode');
+  setTheme(!isDark);
+});
+
+// Intersection Observer for Scroll Animations & Active Dock Item Tracking
+const sections = document.querySelectorAll('section[id]');
+const dockItems = document.querySelectorAll('.dock-item[data-section]');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      dockItems.forEach(item => {
+        if (item.getAttribute('data-section') === id) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(sec => sectionObserver.observe(sec));
+
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
     if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
   });
-}, {threshold:.10});
-revealEls.forEach(el=>io.observe(el));
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
 
-// ---------- PCB trace node lighting ----------
+// PCB Trace Rail lighting
 const nodes = document.querySelectorAll('.node');
-const nodeIo = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
+const nodeIo = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
     if(e.isIntersecting){ e.target.classList.add('lit'); }
   });
-}, {threshold:.3});
-nodes.forEach(n=>nodeIo.observe(n));
+}, { threshold: 0.25 });
+nodes.forEach(n => nodeIo.observe(n));
 
+// Custom Spotlight Cursor & Hover Effects
+const spotlightOverlay = document.getElementById('spotlightOverlay');
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
 
-// ---------- contact form (mailto fallback) ----------
-document.getElementById('contactForm').addEventListener('submit', (e)=>{
+let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+let ringX = mouseX, ringY = mouseY;
+
+window.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  spotlightOverlay.style.setProperty('--cursor-x', `${mouseX}px`);
+  spotlightOverlay.style.setProperty('--cursor-y', `${mouseY}px`);
+  cursorDot.style.left = `${mouseX}px`;
+  cursorDot.style.top = `${mouseY}px`;
+});
+
+function animateCursor() {
+  ringX += (mouseX - ringX) * 0.18;
+  ringY += (mouseY - ringY) * 0.18;
+  cursorRing.style.left = `${ringX}px`;
+  cursorRing.style.top = `${ringY}px`;
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Add hover states for interactive elements
+const interactiveEls = document.querySelectorAll('a, button, .skill-card, .project-card, .cert-card, .hobby-card, .stat-card, input, textarea, .badge, .dock-item');
+interactiveEls.forEach(el => {
+  el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+});
+
+// Card 3D tilt effect on mouse move
+document.querySelectorAll('.skill-card, .project-card, .cert-card, .hobby-card, .stat-card, .contact-panel').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+  });
+});
+
+// ============================= CERTIFICATE LIGHTBOX VIEWER LOGIC =============================
+const certData = [
+  {
+    badge: "NPCIL · GOVT OF INDIA ENTERPRISE",
+    type: "PROJECT WORK & PRACTICAL TRAINING CERTIFICATE",
+    title: "Study of Switchyard Equipments and SCADA Monitoring",
+    recipient: "Sujal Singh Sankhla",
+    offeredBy: "Nuclear Power Corporation of India Limited (NPCIL) · Rawatbhata Rajasthan Site",
+    date: "Jul 04, 2026 (Training: May 19 — Jul 03, 2026)",
+    duration: "45 Days Industrial Training",
+    validity: "Official Government Credential (Ref: RR SITE/NPK/HR/2026/S/878)",
+    certCode: "NPCIL-HR-2026-S878",
+    authority: "Sanjeeva Kumawat (Manager HR - NTC, NPCIL)",
+    fileUrl: "certificates/npcil-scada-cert.png"
+  },
+  {
+    badge: "RELIANCE FOUNDATION & SKILL INDIA",
+    type: "CERTIFICATE OF COMPLETION",
+    title: "Green Mobility and Its Applications",
+    recipient: "Sujal Singh",
+    offeredBy: "Reliance Foundation Skilling Academy through Skill India Digital Hub (NSDC)",
+    date: "Apr 19, 2026",
+    duration: "90 Hours",
+    validity: "Validity authorized by Skill India Digital Hub",
+    certCode: "RFSA-GM-2026-90H",
+    authority: "NSDC · Reliance Foundation Skilling Academy",
+    fileUrl: "certificates/green-mobility-cert.svg"
+  },
+  {
+    badge: "COURSERA PROJECT CERTIFICATE",
+    type: "PROJECT CERTIFICATE",
+    title: "Getting Started with Microsoft Excel",
+    recipient: "Sujal Singh Sankhla",
+    offeredBy: "Coursera & Freedom Learning Group",
+    date: "Apr 15, 2026",
+    duration: "Project Certificate",
+    validity: "Coursera verified learner identity",
+    verifyUrl: "https://coursera.org/verify/52PBFUA3TSXD",
+    certCode: "52PBFUA3TSXD",
+    authority: "Summer Scaggs (Subject Matter Expert, Freedom Learning Group)",
+    fileUrl: "certificates/excel-coursera-cert.svg"
+  },
+  {
+    badge: "NASSCOM & SKILL INDIA DIGITAL HUB",
+    type: "CERTIFICATE OF PARTICIPATION",
+    title: "IT Technical Support Executive",
+    recipient: "Sujal Singh",
+    offeredBy: "NATIONAL ASSOCIATION OF SOFTWARE AND SERVICE COMPANIES (NASSCOM)",
+    date: "Jun 14, 2026",
+    duration: "1 Hour Course",
+    validity: "Validity authorized by Skill India Digital Hub",
+    certCode: "NASSCOM-ITSE-2026",
+    authority: "Sindhu Gangadharan (Chairperson, NASSCOM IT - ITeS SSC)",
+    fileUrl: "certificates/it-support-cert.svg"
+  },
+  {
+    badge: "SKILL INDIA DIGITAL HUB",
+    type: "CERTIFICATE OF PARTICIPATION",
+    title: "Personal Finance - Investment Options: Making Your Money Grow!",
+    recipient: "Sujal Singh",
+    offeredBy: "G O BPO SERVICES PRIVATE LIMITED through Skill India Digital Hub",
+    date: "May 16, 2026",
+    duration: "55 Minutes Course",
+    validity: "Validity authorized by Skill India Digital Hub",
+    certCode: "GOBPO-PF-2026",
+    authority: "Rohin Chawla (Director, G O BPO Services)",
+    fileUrl: "certificates/personal-finance-cert.svg"
+  }
+];
+
+const certModal = document.getElementById('certModal');
+const certModalClose = document.getElementById('certModalClose');
+const certModalContent = document.getElementById('certModalContent');
+let currentCertIndex = 0;
+
+function renderCertView(viewMode) {
+  const cert = certData[currentCertIndex];
+  if (!cert) return;
+
+  const verifyHtml = cert.verifyUrl ? `
+    <a href="${cert.verifyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding:10px 20px; font-size:12.5px;">
+      Verify Online ↗
+    </a>
+  ` : '';
+
+  let bodyContent = '';
+
+  if (viewMode === 'original') {
+    bodyContent = `
+      <div style="padding: 24px; text-align: center;">
+        <div style="border:1px solid var(--card-border); border-radius:16px; overflow:hidden; background:var(--bg-main); box-shadow:0 10px 30px rgba(0,0,0,0.1); margin-bottom:20px;">
+          <img src="${cert.fileUrl}" alt="${cert.title} Original Certificate" style="width:100%; height:auto; display:block;">
+        </div>
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <a href="${cert.fileUrl}" target="_blank" download class="btn btn-primary" style="padding:10px 22px; font-size:12.5px;">
+            Download Original File 📥
+          </a>
+          <a href="${cert.fileUrl}" target="_blank" class="btn btn-ghost" style="padding:10px 22px; font-size:12.5px;">
+            Open File Fullscreen ↗
+          </a>
+        </div>
+      </div>
+    `;
+  } else {
+    bodyContent = `
+      <div class="cert-paper">
+        <div class="cert-paper-border">
+          <div class="cert-paper-header">
+            <div class="cert-paper-badge">${cert.badge}</div>
+            <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-subtle);">${cert.certCode}</div>
+          </div>
+
+          <div class="cert-paper-subtitle">${cert.type}</div>
+          
+          <div class="cert-paper-recipient-label">This is to certify that</div>
+          <div class="cert-paper-recipient">${cert.recipient}</div>
+
+          <div class="cert-paper-body">
+            has successfully completed the practical training / skilling program on<br>
+            <strong style="color:var(--text-main); font-size:20px; font-family:var(--font-heading); display:block; margin:8px 0;">${cert.title}</strong>
+            offered by ${cert.offeredBy}.
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:24px; font-family:var(--font-mono); font-size:12.5px; color:var(--text-muted); margin-bottom:28px;">
+            <span>📅 Date: ${cert.date}</span>
+            <span>⏱ Duration: ${cert.duration}</span>
+          </div>
+
+          <div class="cert-paper-footer">
+            <div class="cert-seal-box">
+              <div class="cert-seal-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l9-4l-9-4l2 3z"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--text-main);">${cert.authority}</div>
+                <div class="cert-sign-text">${cert.validity}</div>
+              </div>
+            </div>
+
+            <div style="text-align:right;">
+              <div style="font-family:var(--font-serif); font-size:18px; font-style:italic; color:var(--text-main); font-weight:600;">Authorized Signatory</div>
+              <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-subtle);">Official Credential Record</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-modal-actions">
+        ${verifyHtml}
+        <button onclick="closeCertModal()" class="btn btn-ghost" style="padding:10px 20px; font-size:12.5px;">Close Viewer</button>
+      </div>
+    `;
+  }
+
+  certModalContent.innerHTML = `
+    <div style="text-align:center; padding-top:20px;">
+      <div style="display:inline-flex; background:var(--bg-elevated); border-radius:50px; padding:4px; border:1px solid var(--card-border); gap:4px;">
+        <button id="switchRenderBtn" onclick="switchView('render')" class="btn ${viewMode === 'render' ? 'btn-primary' : 'btn-ghost'}" style="padding:7px 18px; font-size:12px; border-radius:50px;">
+          📄 Document Render
+        </button>
+        <button id="switchOriginalBtn" onclick="switchView('original')" class="btn ${viewMode === 'original' ? 'btn-primary' : 'btn-ghost'}" style="padding:7px 18px; font-size:12px; border-radius:50px;">
+          🖼️ Original Certificate File
+        </button>
+      </div>
+    </div>
+    ${bodyContent}
+  `;
+}
+
+function switchView(mode) {
+  renderCertView(mode);
+}
+
+function openCertModal(index, initialMode = 'render') {
+  currentCertIndex = parseInt(index);
+  renderCertView(initialMode);
+
+  certModal.classList.add('active');
+  certModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCertModal() {
+  certModal.classList.remove('active');
+  certModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.cert-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    const index = card.getAttribute('data-cert-index');
+    openCertModal(index, 'render');
+  });
+});
+
+certModalClose.addEventListener('click', closeCertModal);
+certModal.addEventListener('click', (e) => {
+  if (e.target === certModal) closeCertModal();
+});
+
+// GAMING PROFILE MODAL LOGIC
+const gamingModal = document.getElementById('gamingModal');
+const gamingModalClose = document.getElementById('gamingModalClose');
+
+function openGamingModal() {
+  gamingModal.classList.add('active');
+  gamingModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGamingModal() {
+  gamingModal.classList.remove('active');
+  gamingModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+gamingModalClose.addEventListener('click', closeGamingModal);
+gamingModal.addEventListener('click', (e) => {
+  if (e.target === gamingModal) closeGamingModal();
+});
+
+// ============================= PHOTOGRAPHY ROLLER GALLERY LOGIC =============================
+const photoData = [
+  {
+    src: "photos/photo-1-palace-night.png",
+    title: "Royal Illuminations under the Crescent Moon",
+    location: "Kishore Sagar Jal Mahal · Kota, Rajasthan",
+    desc: "Architectural reflection of the illuminated palace floating over calm night waters under a slender crescent moon."
+  },
+  {
+    src: "photos/photo-2-waterfall-valley.jpg",
+    title: "Valley of Cascading Streams",
+    location: "Highland Mountain Gorge · Himachal Pradesh",
+    desc: "High-altitude stream carving through ancient stone structures and lush green alpine valleys."
+  },
+  {
+    src: "photos/photo-3-snow-mountains.png",
+    title: "Himalayan Peaks Shrouded in Mist",
+    location: "Alpine Glacier Range · North India",
+    desc: "Monochrome-toned dramatic mountain peak emerging from rolling cloud formations."
+  },
+  {
+    src: "photos/photo-4-helicopter-mountains.jpg",
+    title: "High-Altitude Aviation Landing",
+    location: "Alpine Helipad Base · Mountain Valley",
+    desc: "Precision landing shot of a utility helicopter framed against steep waterfall mountain cliffs."
+  },
+  {
+    src: "photos/photo-5-lake-sunset.png",
+    title: "Golden Dusk Over Serene Waters",
+    location: "Kishore Sagar Lake Skyline · Kota",
+    desc: "Wide panoramic sunset capture blending warm peach-pink sky gradients with lake reflections."
+  },
+  {
+    src: "photos/photo-6-red-heritage-tower.png",
+    title: "Illuminated Red Heritage Minarets",
+    location: "Seven Wonders Park · Kota",
+    desc: "Low-angle architectural night shot highlighting warm amber lights against deep night skies."
+  },
+  {
+    src: "photos/photo-7-haveli-moon.png",
+    title: "Traditional Jharokhas & Crescent Moon",
+    location: "Ancient Haveli Architecture · Rajasthan",
+    desc: "Intricate sandstone jharokha balconies subtly framed under the night sky."
+  },
+  {
+    src: "photos/photo-8-misty-lake-mono.png",
+    title: "Monochrome Mist Over Still Waters",
+    location: "Morning Lake Sanctuary",
+    desc: "Serene monochrome landscape framing hanging tree silhouettes over fog-shrouded waters."
+  },
+  {
+    src: "photos/photo-9-st-pauls-illuminated.jpg",
+    title: "Festival of Lights at St. Paul's",
+    location: "St. Paul's School Campus · Kota",
+    desc: "Vibrant night capture of campus architecture wrapped in festive light decorations and glowing tree."
+  },
+  {
+    src: "photos/photo-10-taj-mahal-palace-mumbai.jpg",
+    title: "The Grand Taj Mahal Palace",
+    location: "Colaba Waterfront · Mumbai",
+    desc: "Low-angle perspective of the historic Taj Mahal Palace hotel towering under a clear blue sky."
+  }
+];
+
+const photoModal = document.getElementById('photoModal');
+const photoModalClose = document.getElementById('photoModalClose');
+const rollerImg = document.getElementById('rollerImg');
+const rollerTitle = document.getElementById('rollerTitle');
+const rollerLoc = document.getElementById('rollerLoc');
+const rollerCounter = document.getElementById('rollerCounter');
+const rollerDownloadBtn = document.getElementById('rollerDownloadBtn');
+const rollerThumbReel = document.getElementById('rollerThumbReel');
+const photoPrevBtn = document.getElementById('photoPrevBtn');
+const photoNextBtn = document.getElementById('photoNextBtn');
+const playPauseBtn = document.getElementById('playPauseBtn');
+
+let currentPhotoIndex = 0;
+let slideshowTimer = null;
+let isPlayingSlideshow = false;
+
+// Render Thumbnails Reel
+rollerThumbReel.innerHTML = photoData.map((p, idx) => `
+  <div class="roller-thumb ${idx === 0 ? 'active' : ''}" data-thumb-index="${idx}">
+    <img src="${p.src}" alt="${p.title}">
+  </div>
+`).join('');
+
+document.querySelectorAll('.roller-thumb').forEach(thumb => {
+  thumb.addEventListener('click', () => {
+    const idx = parseInt(thumb.getAttribute('data-thumb-index'));
+    setPhotoIndex(idx);
+  });
+});
+
+function setPhotoIndex(idx) {
+  if (idx < 0) idx = photoData.length - 1;
+  if (idx >= photoData.length) idx = 0;
+  currentPhotoIndex = idx;
+
+  const photo = photoData[currentPhotoIndex];
+  rollerImg.src = photo.src;
+  rollerImg.alt = photo.title;
+  rollerTitle.textContent = photo.title;
+  rollerLoc.textContent = photo.location;
+  rollerCounter.textContent = `${String(currentPhotoIndex + 1).padStart(2, '0')} / ${String(photoData.length).padStart(2, '0')}`;
+  rollerDownloadBtn.href = photo.src;
+
+  document.querySelectorAll('.roller-thumb').forEach((t, i) => {
+    if (i === currentPhotoIndex) {
+      t.classList.add('active');
+      t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    } else {
+      t.classList.remove('active');
+    }
+  });
+}
+
+function startSlideshow() {
+  isPlayingSlideshow = true;
+  if (playPauseBtn) playPauseBtn.innerHTML = '⏸️ Pause Slideshow';
+  if (slideshowTimer) clearInterval(slideshowTimer);
+  slideshowTimer = setInterval(() => {
+    setPhotoIndex(currentPhotoIndex + 1);
+  }, 2800);
+}
+
+function stopSlideshow() {
+  isPlayingSlideshow = false;
+  if (playPauseBtn) playPauseBtn.innerHTML = '▶️ Auto Slideshow';
+  if (slideshowTimer) clearInterval(slideshowTimer);
+}
+
+function toggleSlideshow() {
+  if (isPlayingSlideshow) stopSlideshow();
+  else startSlideshow();
+}
+
+function openPhotoModal(idx) {
+  setPhotoIndex(idx);
+  photoModal.classList.add('active');
+  photoModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  startSlideshow();
+}
+
+function closePhotoModal() {
+  stopSlideshow();
+  photoModal.classList.remove('active');
+  photoModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+photoPrevBtn.addEventListener('click', () => {
+  stopSlideshow();
+  setPhotoIndex(currentPhotoIndex - 1);
+});
+
+photoNextBtn.addEventListener('click', () => {
+  stopSlideshow();
+  setPhotoIndex(currentPhotoIndex + 1);
+});
+
+photoModalClose.addEventListener('click', closePhotoModal);
+photoModal.addEventListener('click', (e) => {
+  if (e.target === photoModal) closePhotoModal();
+});
+
+window.addEventListener('keydown', (e) => {
+  if (photoModal.classList.contains('active')) {
+    if (e.key === 'Escape') closePhotoModal();
+    if (e.key === 'ArrowLeft') { stopSlideshow(); setPhotoIndex(currentPhotoIndex - 1); }
+    if (e.key === 'ArrowRight') { stopSlideshow(); setPhotoIndex(currentPhotoIndex + 1); }
+  }
+  if (e.key === 'Escape' && gamingModal.classList.contains('active')) {
+    closeGamingModal();
+  }
+});
+
+// Contact Form Handler
+document.getElementById('contactForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const name = document.getElementById('cname').value;
   const email = document.getElementById('cemail').value;
   const msg = document.getElementById('cmsg').value;
   const body = encodeURIComponent(`${msg}\n\n— ${name} (${email})`);
-  window.location.href = `mailto:Sujalsingh2k25@gmail.com?subject=Portfolio%20Inquiry&body=${body}`;
+  window.location.href = `mailto:Sujalsingh2k25@gmail.com?subject=Portfolio%20Inquiry%20from%20${encodeURIComponent(name)}&body=${body}`;
 });
 </script>
 </body>

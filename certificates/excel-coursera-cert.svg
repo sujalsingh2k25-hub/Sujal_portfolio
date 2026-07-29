@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" width="100%" height="100%">
+  <rect width="1200" height="850" fill="#FFFFFF"/>
+  <rect x="20" y="20" width="1160" height="810" fill="none" stroke="#CBD5E1" stroke-width="4"/>
+  <rect x="30" y="30" width="1140" height="790" fill="none" stroke="#94A3B8" stroke-width="1"/>
+  
+  <!-- Coursera Brand Ribbon -->
+  <rect x="800" y="30" width="260" height="650" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  
+  <!-- Coursera Logo -->
+  <text x="120" y="160" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="44" fill="#0056D2">coursera</text>
+  
+  <text x="120" y="240" font-family="'JetBrains Mono', monospace" font-size="14" fill="#64748B">Apr 15, 2026</text>
+  
+  <!-- Recipient -->
+  <text x="120" y="310" font-family="'Cinzel', 'Space Grotesk', serif" font-weight="700" font-size="44" fill="#0F172A">Sujal Singh Sankhla</text>
+  <text x="120" y="350" font-family="'Inter', sans-serif" font-size="16" fill="#64748B">has successfully completed</text>
+  
+  <!-- Course Name -->
+  <text x="120" y="410" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="34" fill="#0056D2">Getting Started with Microsoft Excel</text>
+  <text x="120" y="445" font-family="'Inter', sans-serif" font-size="15" fill="#64748B">an online project authorized by Coursera and offered through Coursera</text>
+  
+  <!-- Signatory -->
+  <line x1="120" y1="580" x2="360" y2="580" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="120" y="605" font-family="'Inter', sans-serif" font-weight="600" font-size="14" fill="#334155">Summer Scaggs</text>
+  <text x="120" y="625" font-family="'Inter', sans-serif" font-size="13" fill="#64748B">Subject Matter Expert, Freedom Learning Group</text>
+  
+  <!-- Certificate Seal Right Ribbon -->
+  <circle cx="930" cy="420" r="100" fill="#FFFFFF" stroke="#475569" stroke-width="3" stroke-dasharray="6,4"/>
+  <text x="930" y="375" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="14" fill="#334155" text-anchor="middle">EDUCATION FOR EVERYONE</text>
+  <text x="930" y="425" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="24" fill="#0056D2" text-anchor="middle">coursera</text>
+  <text x="930" y="465" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="14" fill="#334155" text-anchor="middle">PROJECT CERTIFICATE</text>
+  
+  <text x="930" y="660" font-family="'JetBrains Mono', monospace" font-size="12" fill="#0056D2" text-anchor="middle">Verify at:</text>
+  <text x="930" y="680" font-family="'JetBrains Mono', monospace" font-size="12" fill="#0F172A" text-anchor="middle">coursera.org/verify/52PBFUA3TSXD</text>
+</svg>
