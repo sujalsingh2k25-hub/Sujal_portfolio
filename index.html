@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#FFFFFF" id="metaThemeColor">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Sujal Singh — Electrical Engineering &amp; Embedded Systems</title>
 <meta name="description" content="Sujal Singh — Electrical Engineering undergraduate at RTU Kota. Specializing in embedded systems, SCADA automation, and smart control prototypes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,13 +125,32 @@ body.dark-mode .badge {
 }
 
 /* ============================= SUPPRESS SYSTEM CURSOR ============================= */
-*, *::before, *::after, html, body, a, button, input, textarea, select, .dock-item, .cert-card, .skill-card, .project-card, .hobby-card {
-  cursor: none !important;
+/* ============================= TOUCH & FINE POINTER CURSOR HANDLING ============================= */
+@media (hover: hover) and (pointer: fine) {
+  *, *::before, *::after, html, body, a, button, input, textarea, select, .dock-item, .cert-card, .skill-card, .project-card, .hobby-card {
+    cursor: none !important;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+  .custom-cursor, .custom-cursor-dot {
+    display: none !important;
+  }
+  *, *::before, *::after, html, body, a, button, input, textarea, select, .dock-item, .cert-card, .skill-card, .project-card, .hobby-card {
+    cursor: auto !important;
+  }
+  a, button, .dock-item, .cert-card, .skill-card, .project-card, .hobby-card, .btn, input, textarea {
+    cursor: pointer !important;
+    touch-action: manipulation;
+  }
 }
 
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  max-width: 100vw;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -137,7 +159,9 @@ body {
   font-family: var(--font-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  max-width: 100vw;
   overflow-x: hidden;
+  width: 100%;
   position: relative;
   padding-bottom: 90px;
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -1052,22 +1076,79 @@ footer p { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-s
 .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal-right.show { opacity: 1; transform: translateX(0); }
 
+/* ============================= ENHANCED MOBILE & TABLET RESPONSIVE RULES ============================= */
 @media (max-width: 860px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-  .about-grid { grid-template-columns: 1fr; }
-  .skill-grid, .cert-grid, .hobby-grid { grid-template-columns: 1fr; }
-  .project-cols { grid-template-columns: 1fr; }
-  .contact-panel { grid-template-columns: 1fr; padding: 36px; }
+  .wrap { padding: 0 20px; }
+  
+  /* Header Navigation */
+  .nav-inner { padding: 12px 20px; }
+  .navlinks { display: none !important; }
+  .nav-cta { padding: 8px 16px; font-size: 11.5px; }
+  
+  /* Hero Section */
+  .hero { padding: 100px 0 50px; min-height: auto; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+  .status-badge { margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { max-width: 320px; margin: 0 auto; }
+  
+  /* Grids & Cards */
+  .about-grid { grid-template-columns: 1fr; gap: 24px; }
+  .skill-grid, .cert-grid, .hobby-grid { grid-template-columns: 1fr; gap: 18px; }
+  .project-cols { grid-template-columns: 1fr; gap: 24px; }
+  .contact-panel { grid-template-columns: 1fr; padding: 28px 20px; gap: 32px; }
+  
+  /* PCB Trace Rail */
   .trace-rail { left: 18px; }
   .node { padding-left: 36px; }
   .node-pad { left: 18px; }
-  .dock-container { bottom: 12px; }
-  .floating-dock { gap: 2px; padding: 6px 10px; }
-  .dock-item { width: 38px; height: 38px; }
-  .cert-paper { padding: 24px 16px; margin: 10px; }
+  
+  /* Floating Bottom Dock */
+  .dock-container { bottom: 12px; width: calc(100% - 24px); max-width: 520px; }
+  .floating-dock { gap: 3px; padding: 6px 10px; justify-content: center; max-width: 100%; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .floating-dock::-webkit-scrollbar { display: none; }
+  .dock-item { width: 38px; height: 38px; flex-shrink: 0; }
+  .dock-divider { margin: 0 2px; height: 18px; }
+  
+  /* Certificate Modal */
+  .cert-modal-overlay { padding: 12px; }
+  .cert-paper { padding: 24px 16px; margin: 0; border-width: 6px; }
   .cert-paper-title { font-size: 20px; }
-  .cert-paper-recipient { font-size: 26px; }
-  .photo-roller-container { height: 60vh; }
+  .cert-paper-recipient { font-size: 24px; }
+  .cert-paper-header, .cert-paper-footer { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+  .cert-seal-box { text-align: center; flex-direction: column; }
+  
+  /* Photo Roller Gallery Lightbox Modal */
+  .photo-modal-overlay { padding: 16px 12px; }
+  .photo-roller-container { height: calc(100vh - 180px); margin-top: 10px; gap: 10px; }
+  .roller-img-wrap img { max-height: 52vh; }
+  .roller-caption-bar { flex-direction: column; gap: 8px; padding: 12px 16px; border-radius: var(--radius-md); text-align: center; }
+  .roller-nav-btn { width: 42px; height: 42px; }
+  
+  /* Ambient Orbs */
+  .orb-1 { width: 300px; height: 300px; top: -50px; right: -80px; }
+  .orb-2 { width: 350px; height: 350px; left: -100px; }
+}
+
+@media (max-width: 480px) {
+  .wrap { padding: 0 14px; }
+  .nav-inner { padding: 10px 14px; }
+  .logo { font-size: 13px; gap: 8px; }
+  .logo-chip { width: 32px; height: 32px; font-size: 11.5px; }
+  .nav-cta { padding: 6px 12px; font-size: 11px; }
+  
+  .dock-container { bottom: 8px; width: calc(100% - 12px); }
+  .floating-dock { gap: 2px; padding: 5px 6px; }
+  .dock-item { width: 34px; height: 34px; }
+  .dock-item svg { width: 17px; height: 17px; }
+  
+  .cert-paper { padding: 18px 12px; border-width: 4px; }
+  .cert-paper-border { padding: 20px 12px; }
+  .cert-paper-title { font-size: 18px; }
+  .cert-paper-recipient { font-size: 20px; }
+  
+  .hero-visual { max-width: 260px; }
+  .contact-panel { padding: 20px 14px; }
 }
 </style>
 </head>
@@ -1874,11 +1955,13 @@ function setTheme(isDark) {
     themeSun.style.display = 'block';
     themeMoon.style.display = 'none';
     localStorage.setItem('theme', 'dark');
+    if (metaThemeColor) metaThemeColor.setAttribute('content', '#050505');
   } else {
     document.body.classList.remove('dark-mode');
     themeSun.style.display = 'none';
     themeMoon.style.display = 'block';
     localStorage.setItem('theme', 'light');
+    if (metaThemeColor) metaThemeColor.setAttribute('content', '#FFFFFF');
   }
 }
 
@@ -1940,49 +2023,53 @@ const cursorRing = document.getElementById('cursorRing');
 let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
 let ringX = mouseX, ringY = mouseY;
 
-window.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  spotlightOverlay.style.setProperty('--cursor-x', `${mouseX}px`);
-  spotlightOverlay.style.setProperty('--cursor-y', `${mouseY}px`);
-  cursorDot.style.left = `${mouseX}px`;
-  cursorDot.style.top = `${mouseY}px`;
-});
+const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-function animateCursor() {
-  ringX += (mouseX - ringX) * 0.18;
-  ringY += (mouseY - ringY) * 0.18;
-  cursorRing.style.left = `${ringX}px`;
-  cursorRing.style.top = `${ringY}px`;
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
+if (isFinePointer) {
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    spotlightOverlay.style.setProperty('--cursor-x', `${mouseX}px`);
+    spotlightOverlay.style.setProperty('--cursor-y', `${mouseY}px`);
+    cursorDot.style.left = `${mouseX}px`;
+    cursorDot.style.top = `${mouseY}px`;
+  });
 
-// Add hover states for interactive elements
-const interactiveEls = document.querySelectorAll('a, button, .skill-card, .project-card, .cert-card, .hobby-card, .stat-card, input, textarea, .badge, .dock-item');
-interactiveEls.forEach(el => {
-  el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
-  el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
-});
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    cursorRing.style.left = `${ringX}px`;
+    cursorRing.style.top = `${ringY}px`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
 
-// Card 3D tilt effect on mouse move
-document.querySelectorAll('.skill-card, .project-card, .cert-card, .hobby-card, .stat-card, .contact-panel').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -4;
-    const rotateY = ((x - centerX) / centerX) * 4;
+  // Add hover states for interactive elements
+  const interactiveEls = document.querySelectorAll('a, button, .skill-card, .project-card, .cert-card, .hobby-card, .stat-card, input, textarea, .badge, .dock-item');
+  interactiveEls.forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+  });
+
+  // Card 3D tilt effect on mouse move
+  document.querySelectorAll('.skill-card, .project-card, .cert-card, .hobby-card, .stat-card, .contact-panel').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
     
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+    });
   });
-  
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
-  });
-});
+}
 
 // ============================= CERTIFICATE LIGHTBOX VIEWER LOGIC =============================
 const certData = [
