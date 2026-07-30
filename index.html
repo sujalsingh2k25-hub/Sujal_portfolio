@@ -2245,7 +2245,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease;
+      cursor: pointer;
+      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s ease;
     }
     
     .telemetry-loader-veil.dismissed {
@@ -2255,7 +2256,7 @@
     }
     
     .loader-content {
-      width: min(90vw, 440px);
+      width: min(92vw, 540px);
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -2270,7 +2271,7 @@
       border-radius: var(--radius-full);
       background: var(--red-light);
       border: 1px solid var(--line-c-strong);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     
     .loader-chip-dot {
@@ -2293,15 +2294,15 @@
     .loader-counter-wrap {
       font-family: var(--font-heading);
       font-weight: 700;
-      font-size: 64px;
+      font-size: 68px;
       color: var(--text-main);
       line-height: 1;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     
     .loader-percent-symbol {
       color: var(--red-primary);
-      font-size: 40px;
+      font-size: 42px;
       margin-left: 2px;
     }
     
@@ -2320,7 +2321,7 @@
       height: 100%;
       background: var(--red-gradient);
       border-radius: 4px;
-      transition: width 0.15s ease-out;
+      transition: width 0.08s ease-out;
       box-shadow: 0 0 12px var(--red-glow);
     }
     
@@ -2330,6 +2331,54 @@
       color: var(--text-muted);
       font-weight: 500;
       min-height: 24px;
+      margin-bottom: 24px;
+    }
+
+    .loader-quote-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px 24px;
+      width: 100%;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    .loader-quote-text {
+      font-size: 14.5px;
+      font-style: italic;
+      color: var(--text-main);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .loader-quote-author {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--red-primary);
+    }
+
+    .loader-enter-btn {
+      width: 100%;
+      padding: 14px 24px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      background: var(--red-gradient);
+      color: #050505;
+      border: none;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer;
+      animation: pulseBtn 1.8s infinite alternate;
+      transition: all 0.25s ease;
+    }
+
+    @keyframes pulseBtn {
+      0% { transform: scale(0.98); box-shadow: 0 4px 20px var(--red-glow); }
+      100% { transform: scale(1.02); box-shadow: 0 10px 32px var(--red-glow); }
     }
     
     /* ============================= TOAST NOTIFICATION STYLES ============================= */
@@ -2387,6 +2436,23 @@
     <div class="loader-bar-track">
       <div id="loaderBarFill" class="loader-bar-fill"></div>
     </div>
+    
+    <div id="loaderStatusText" class="loader-status-msg">
+      ⚙️ Initializing SCADA Telemetry & Power Modules...
+    </div>
+
+    <!-- Dynamic Quote Readout -->
+    <div id="loaderQuoteBox" class="loader-quote-box">
+      <p id="loaderQuoteText" class="loader-quote-text">“Simplicity is prerequisite for reliability.”</p>
+      <span id="loaderQuoteAuthor" class="loader-quote-author">— Edsger W. Dijkstra</span>
+    </div>
+
+    <!-- Click to Enter Prompt -->
+    <button id="loaderEnterBtn" class="loader-enter-btn" style="display: none;">
+      ✦ CLICK OR PRESS ANY KEY TO ENTER SITE ↑
+    </button>
+  </div>
+</div>
     
     <div id="loaderStatusText" class="loader-status-msg">
       ⚙️ Initializing SCADA Telemetry & Power Modules...
@@ -2749,6 +2815,11 @@
 
       <div class="dock-divider"></div>
 
+      <button class="dock-item" id="dockShortcutBtn" onclick="openShortcutsModal()" aria-label="Keyboard Shortcuts" style="width: auto; padding: 0 10px; border-radius: var(--radius-full);">
+        <kbd style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--red-primary); background: var(--red-light); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line-c-strong);">K</kbd>
+        <span class="dock-tooltip">Keyboard Shortcuts (K)</span>
+      </button>
+      <div class="dock-divider"></div>
       <button class="dock-item" id="themeToggle" aria-label="Toggle Theme">
         <svg id="themeSun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           style="display:none;">
@@ -3954,21 +4025,70 @@
     const loaderPercent = document.getElementById('loaderPercent');
     const loaderBarFill = document.getElementById('loaderBarFill');
     const loaderStatusText = document.getElementById('loaderStatusText');
+    const loaderQuoteText = document.getElementById('loaderQuoteText');
+    const loaderQuoteAuthor = document.getElementById('loaderQuoteAuthor');
+    const loaderEnterBtn = document.getElementById('loaderEnterBtn');
+
+    // Curated Science & Engineering Quotes Fallback
+    const fallbackQuotes = [
+      { quote: "Simplicity is prerequisite for reliability.", author: "Edsger W. Dijkstra" },
+      { quote: "The present is theirs; the future, for which I really worked, is mine.", author: "Nikola Tesla" },
+      { quote: "Talk is cheap. Show me the code.", author: "Linus Torvalds" },
+      { quote: "Information is the resolution of uncertainty.", author: "Claude Shannon" },
+      { quote: "What I cannot create, I do not understand.", author: "Richard Feynman" },
+      { quote: "Logic will get you from A to B. Imagination will take you everywhere.", author: "Albert Einstein" }
+    ];
+
+    // Fetch random quote from API with instant fallback
+    async function loadPreloaderQuote() {
+      const randomFallback = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+      try {
+        const res = await fetch('https://dummyjson.com/quotes/random');
+        if (res.ok) {
+          const data = await res.json();
+          if (loaderQuoteText && loaderQuoteAuthor) {
+            loaderQuoteText.textContent = `“${data.quote}”`;
+            loaderQuoteAuthor.textContent = `— ${data.author}`;
+            return;
+          }
+        }
+      } catch (err) {
+        // network fallback
+      }
+      if (loaderQuoteText && loaderQuoteAuthor) {
+        loaderQuoteText.textContent = `“${randomFallback.quote}”`;
+        loaderQuoteAuthor.textContent = `— ${randomFallback.author}`;
+      }
+    }
+    loadPreloaderQuote();
 
     const loaderMessages = [
       "⚙️ Initializing SCADA Telemetry & Power Modules...",
       "⚡ Calibrating Microcontroller Clocks & Sensor Arrays...",
       "💻 Synthesizing Embedded C/C++ Firmware...",
       "🔋 Loading Powertrain Battery Management Protocols...",
-      "✦ System Calibrated · Welcome to Sujal's Portfolio"
+      "✦ System Calibrated · Ready to Enter"
     ];
 
     let currentProgress = 0;
     const hasVisitedSession = sessionStorage.getItem('telemetry_visited');
-    const duration = hasVisitedSession ? 500 : 1600;
+    const duration = hasVisitedSession ? 700 : 3200; // Silky smooth 3.2s progress pace
     const intervalTime = 25;
     const steps = duration / intervalTime;
     const increment = 100 / steps;
+    let isLoaderDismissed = false;
+
+    function dismissPreloader() {
+      if (isLoaderDismissed) return;
+      isLoaderDismissed = true;
+      if (telemetryLoader) telemetryLoader.classList.add('dismissed');
+      sessionStorage.setItem('telemetry_visited', 'true');
+
+      // Toast hint for keyboard shortcuts after dismiss
+      setTimeout(() => {
+        showToast('✦ Pro Tip: Press "K" or "?" for Power Shortcuts');
+      }, 700);
+    }
 
     const loaderInterval = setInterval(() => {
       currentProgress += increment;
@@ -3980,10 +4100,15 @@
         if (loaderBarFill) loaderBarFill.style.width = '100%';
         if (loaderStatusText) loaderStatusText.textContent = loaderMessages[4];
 
+        // Reveal Click-to-Enter prompt button
+        if (loaderEnterBtn) {
+          loaderEnterBtn.style.display = 'block';
+        }
+
+        // Auto enter after 1.8s if not clicked
         setTimeout(() => {
-          if (telemetryLoader) telemetryLoader.classList.add('dismissed');
-          sessionStorage.setItem('telemetry_visited', 'true');
-        }, 200);
+          dismissPreloader();
+        }, 1800);
       } else {
         const rounded = Math.floor(currentProgress);
         if (loaderPercent) loaderPercent.textContent = rounded;
@@ -3997,6 +4122,10 @@
         }
       }
     }, intervalTime);
+
+    // Click anywhere on preloader veil or press enter button to dismiss
+    if (telemetryLoader) telemetryLoader.addEventListener('click', dismissPreloader);
+    if (loaderEnterBtn) loaderEnterBtn.addEventListener('click', dismissPreloader);
 
     // ============================= COPY TOAST NOTIFICATION SCRIPT =============================
     const toastNotification = document.getElementById('toastNotification');
